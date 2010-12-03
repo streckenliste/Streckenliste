@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!-- <!DOCTYPE ... > -->
+<!--  VERSION = Aktuelle Programmversion!! -->
+<streckenlisten xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///E:/PraktProgrammieren/DatenDesign/Entwurf/StreckenlistePC_V4_Schema.xsd">
+	<deckblatt version="">
+		<anschrUJB>
+			<ujbLRA/>
+			<ujbSG/>
+			<ujbStr/>
+			<ujbPLZ/>
+			<ujbOrt/>
+		</anschrUJB>
+		<revArt/>
+		<revName/>
+		<verwert/>
+		<!-- 1, 2 oder 3 -->
+		<bSatzart/>
+		<amtID/>
+		<revNr/>
+	</deckblatt>
+	<daten>
+		<listeA>
+			<jJahr jJahr="">
+				<version/>
+				<abgDatum/>
+				<ort/>
+				<abgUschrift/>
+				<aZeile aID="">
+					<aDatum/>
+					<aGewicht/>
+					<aWildart/>
+					<aKlasse/>
+					<aBemerk/>
+					<aEintragArt/>
+					<aMeldedatum/>
+				</aZeile>
+			</jJahr>
+		</listeA>
+		<listeB>
+			<jJahr jJahr="">
+				<version/>
+				<bZeile wildartID="">
+					<bWildart/>
+					<bAnzErlegt/>
+					<bAnzFallVerend/>
+					<bAnzFallVerkehr/>
+					<bBemerk/>
+				</bZeile>
+			</jJahr>
+		</listeB>
+	</daten>
+	<sollabschuesse>
+		<jJahr jAbschPlan="" pJahre="">
+			<aWildart wildartID="100">
+				<aKeiler wildartID="101">
+					<soll/>
+				</aKeiler>
+				<aBache wildartID="102">
+					<soll/>
+				</aBache>
+				<aUeberM wildartID="103">
+					<soll/>
+				</aUeberM>
+				<aUeberW wildartID="104">
+					<soll/>
+				</aUeberW>
+				<aFrisch wildartID="105">
+					<soll/>
+				</aFrisch>
+			</aWildart>
+			<aWildart wildartID="020">
+				<aHirschI wildartID="021">
+					<soll/>
+				</aHirschI>
+				<aHirschIIa wildartID="022">
+					<soll/>
+				</aHirschIIa>
+				<aHirschIIb wildartID="023">
+					<soll/>
+				</aHirschIIb>
+				<aHirschIII wildartID="024">
+					<soll/>
+				</aHirschIII>
+				<aAlttier wildartID="025">
+					<soll/>
+				</aAlttier>
+				<aSchmaltier wildartID="026">
+					<soll/>
+				</aSchmaltier>
+				<aKalb wildartID="027">
+					<soll/>
+				</aKalb>
+			</aWildart>
+			<aWildart wildartID="030">
+				<aBockIa wildartID="031">
+					<soll/>
+				</aBockIa>
+				<aBockIb wildartID="032">
+					<soll/>
+				</aBockIb>
+				<aBockIIa wildartID="033">
+					<soll/>
+				</aBockIIa>
+				<aBockIIb wildartID="034">
+					<soll/>
+				</aBockIIb>
+				<aGeiss wildartID="035">
+					<soll/>
+				</aGeiss>
+				<aJaehrling wildartID="036">
+					<soll/>
+				</aJaehrling>
+				<aKitz wildartID="037">
+					<soll/>
+				</aKitz>
+			</aWildart>
+			<aWildart wildartID="040">
+				<aHirschI wildartID="041">
+					<soll/>
+				</aHirschI>
+				<aHirschIIa wildartID="042">
+					<soll/>
+				</aHirschIIa>
+				<aHirschIIb wildartID="043">
+					<soll/>
+				</aHirschIIb>
+				<aHirschIII wildartID="044">
+					<soll/>
+				</aHirschIII>
+				<aAlttier wildartID="045">
+					<soll/>
+				</aAlttier>
+				<aSchmaltier wildartID="046">
+					<soll/>
+				</aSchmaltier>
+				<aKalb wildartID="047">
+					<soll/>
+				</aKalb>
+			</aWildart>
+			<aWildart wildartID="050">
+				<aWidderIa wildartID="051">
+					<soll/>
+				</aWidderIa>
+				<aWidderIb wildartID="052">
+					<soll/>
+				</aWidderIb>
+				<aWidderIIa wildartID="053">
+					<soll/>
+				</aWidderIIa>
+				<aWidderIIb wildartID="054">
+					<soll/>
+				</aWidderIIb>
+				<aAltschaf wildartID="055">
+					<soll/>
+				</aAltschaf>
+				<aSchmalschaf wildartID="056">
+					<soll/>
+				</aSchmalschaf>
+				<aLamm wildartID="057">
+					<soll/>
+				</aLamm>
+			</aWildart>
+			<aWildart wildartID="060">
+				<aAuerhahn wildartID="061">
+					<soll/>
+				</aAuerhahn>
+			</aWildart>
+			<aWildart wildartID="070">
+				<aBirkhahn wildartID="071">
+					<soll/>
+				</aBirkhahn>
+			</aWildart>
+			<aWildart wildartID="080">
+				<aRackelhahn wildartID="081">
+					<soll/>
+				</aRackelhahn>
+			</aWildart>
+		</jJahr>
+	</sollabschuesse>
+</streckenlisten>

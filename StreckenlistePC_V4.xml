@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE ... > -->
+
+
+<!--  VERSION = Aktuelle Programmversion!! -->
+
+
+<streckenlisten>
+	<deckblatt version="1.0">
+		<anschrUJB>
+			<!-- evtl. auslesbar aus (erweiterter) "ujbVerz.xml" -->
+			<ujbLRA>Landratsamt Hof</ujbLRA>
+			<ujbSG>- Untere Jagdbehörde</ujbSG>
+			<ujbStr>Schaumbergstraße 14</ujbStr>
+			<ujbPLZ>95032</ujbPLZ>
+			<ujbOrt>Hof</ujbOrt>
+		</anschrUJB>
+
+		<revArt>3</revArt>
+		<revName>Baiergrün</revName>
+
+		<verwert>1</verwert>
+
+		<bSatzart>08</bSatzart>
+		<amtID>475136</amtID>
+		<revNr>0001xxxx</revNr><!-- genaue RevNr. unbekannt -->
+	</deckblatt>
+
+	<daten>
+		<listeA>
+
+			<jJahr jJahr="2009">
+				<version>1.0</version>
+				<abgDatum></abgDatum>
+				<ort></ort>
+				<abgUschrift></abgUschrift>
+				
+				<!-- Daten der Streckenliste A / Jagdjahr 2009/2010 -->
+				
+			</jJahr>
+
+			<jJahr jJahr="2010">
+				<version>1.1</version>
+				<abgDatum>31.03.2011</abgDatum>
+				<ort>Hof</ort>
+				<abgUschrift>Wunderatsch</abgUschrift>
+			<!-- ort = Ort im Unterschriftenfeld, agbUschrift = Name des Jägers in Klartext  -->
+			
+				
+				<aZeile aID="1">
+					<aDatum>2.5.2010</aDatum>
+					<aGewicht>13</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Rainer Dick, Bastspießer, Mittleres Greim, 6cm, Jb</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="2">
+					<aDatum>13.5.2010</aDatum>
+					<aGewicht>14</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Torsten Schmidt, Bastspießer, Mittlerer Greim, 8cm, Jb</aBemerk>
+					<aaZeileArt></aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="3">
+					<aDatum>15.5.2010</aDatum>
+					<aGewicht>17</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Manfred Dittmart Ung. Gabler, Heinzabach, Mb</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="4">
+					<aDatum>1.6.2010</aDatum>
+					<aGewicht>44</aGewicht>
+					<aWildart>100</aWildart><!-- "Schwarzwild" -->
+					<aKlasse>103</aKlasse><!-- "Überläufer, männl." -->
+					<aBemerk>Hartmut Wunderatsch, Schreinholz, Kanzel</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="5">
+					<aDatum>5.6.2010</aDatum>
+					<aGewicht>13,5</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Günther Hüttner, Vaugus Kanzel, Jb, Knopfer, Bast</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="6">
+					<aDatum>8.6.2010</aDatum>
+					<aGewicht>13,5</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Verkehr, Polizei, Altsuttenbach, Ja</aBemerk>
+					<aaZeileArt>Verkehr</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="7">
+					<aDatum>11.6.2010</aDatum>
+					<aGewicht>unbek.</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Hartmut Wunderatsch, Mittl. Greim, Jb, Bastspießer</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="8">
+					<aDatum>12.6.2010</aDatum>
+					<aGewicht>unbek.</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>012</aKlasse><!-- "Böcke" -->
+					<aBemerk>Verkehr, Polizei, Raumenberg, Geiß</aBemerk>
+					<aaZeileArt>Verkehr</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="9">
+					<aDatum>15.6.2010</aDatum>
+					<aGewicht>unbek.</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>012</aKlasse><!-- "Böcke" -->
+					<aBemerk>Fallwild, Roland Ried, Schmauerer</aBemerk>
+					<aaZeileArt>sonstFallwild</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="10">
+					<aDatum>21.6.2010</aDatum>
+					<aGewicht>16,5</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Manfred Dittmar, Unt. Fichtenholz, Spießer, Mb</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="11">
+					<aDatum>26.6.2010</aDatum>
+					<aGewicht>16</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Hartmut Wunderatsch, Obstgarten, Gabler, 8cm, Jb</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="12">
+					<aDatum>19.7.2010</aDatum>
+					<aGewicht>19,5</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Günther Hüttner, Obstgarten, Ung. Gabler, 8cm, Mb</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="13">
+					<aDatum>28.7.2010</aDatum>
+					<aGewicht>19,5</aGewicht>
+					<aWildart>100</aWildart><!-- "Schwarzwild" -->
+					<aKlasse>104</aKlasse><!-- "Überläufer, weibl." -->
+					<aBemerk>Hartmut Wunderatsch, Obstgarten, Weizen</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="14">
+					<aDatum>6.8.2010</aDatum>
+					<aGewicht>18</aGewicht>
+					<aWildart>010</aWildart><!-- "Rehwild" -->
+					<aKlasse>011</aKlasse><!-- "Böcke" -->
+					<aBemerk>Manfred Krück, Schreinholz, Ab</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="15">
+					<aDatum>6.8.2010</aDatum>
+					<aGewicht>18</aGewicht>
+					<aWildart>100</aWildart><!-- "Schwarzwild" -->
+					<aKlasse>105</aKlasse><!-- "Frischlinge" -->
+					<aBemerk>Hartmut Wunderatsch, Kanzel Lehstener Grund</aBemerk>
+					<aaZeileArt>Erlegt</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+				<aZeile aID="16">
+					<aDatum>6.8.2010</aDatum>
+					<aGewicht>unbek.</aGewicht>
+					<aWildart>100</aWildart><!-- "Schwarzwild" -->
+					<aKlasse>105</aKlasse><!-- "Frischlinge" -->
+					<aBemerk>Verkehr, Polizei, Bühlk</aBemerk>
+					<aaZeileArt>Verkehr</aaZeileArt>
+					<aMeldedatum></aMeldedatum>
+				</aZeile>
+
+			</jJahr>
+
+		
+
+		</listeA>
+
+		<listeB>
+			<jJahr jJahr="2009">
+				<version>1.0</version>
+				<!-- Daten der Streckenliste B / Jagdjahr 2009/2010 -->
+			</jJahr>
+
+			<jJahr jJahr="2010">
+				<version>1.0</version>
+
+				<bZeile wildartID="101">
+					<bWildart>aKeiler</bWildart>
+					<bAnzErlegt>12</bAnzErlegt>
+					<bAnzFallVerend>1</bAnzFallVerend>
+					<bAnzFallVerkehr>2</bAnzFallVerkehr>
+					<bBemerk></bBemerk>
+				</bZeile>
+				
+				<bZeile wildartID="102">
+					<bWildart>aBache</bWildart>
+					<bAnzFallVerend>5</bAnzFallVerend>
+					<bBemerk></bBemerk>
+				</bZeile>
+				
+				<bZeile wildartID="201">
+					<bWildart>bFeldhase</bWildart>
+					<bAnzErlegt>8</bAnzErlegt>
+					<bAnzFallVerkehr>9</bAnzFallVerkehr>
+					<bBemerk></bBemerk>
+				</bZeile>
+				
+				<bZeile wildartID="205">
+					<bWildart>bFuchs</bWildart>
+					<bAnzErlegt>6</bAnzErlegt>
+					<bBemerk>Ha=3, E=3</bBemerk>
+				</bZeile>
+				
+			</jJahr>
+
+		
+
+		</listeB>
+
+	</daten>
+
+	<sollabschuesse>
+		<jJahr jAbschPlan="2007" nJahre="3">
+			<!-- Sollabschüsse / Jagdjahre 2007 bis 2010 -->
+		</jJahr>
+
+		<jJahr jAbschPlan="2010" nJahre="3">
+			<aWildart id="010">
+				<aBock>24</aBock>
+				<aGeiss>21</aGeiss>
+			</aWildart>
+		</jJahr>
+
+		<jJahr jAbschPlan="2010" nJahre="1">
+			<aWildart id="020">
+				<aHirschI>14</aHirschI>
+				<aHirschIIa>12</aHirschIIa>
+				<aHirschIIb>1</aHirschIIb>
+				<aHirschIII>22</aHirschIII>
+				<aAlttier>5</aAlttier>
+				<aSchmaltier>43</aSchmaltier>
+				<aKalb>42</aKalb>
+			</aWildart>
+		</jJahr>
+
+		<jJahr jAbschPlan="2013">
+			<!-- Sollabschüsse / Jagdjahre 2013 bis 2017 -->
+		</jJahr>		
+	</sollabschuesse>
+
+</streckenlisten>

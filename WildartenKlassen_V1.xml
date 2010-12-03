@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wildarten>
+	<streckenlisteA>
+		<aWildart wildartID="010" wildartName="aReh" anzName="Rehwild">
+			<aBock>
+				<wildartID>011</wildartID>
+				<anzName>Bock</anzName>
+			</aBock>
+			<aGeiss>
+				<wildartID>012</wildartID>
+				<anzName>Geiss</anzName>
+			</aGeiss>
+			<aKitz>
+				<wildartID>013</wildartID>
+				<anzName>Kitz</anzName>
+			</aKitz>
+		</aWildart>
+
+
+		<aWildart wildartID="100" wildartName="aSchwarz" anzName="Schwarzwild">
+			<aKeiler>
+				<wildartID>101</wildartID>
+				<anzName>Keiler</anzName>
+			</aKeiler>
+			<aBache>
+				<wildartID>102</wildartID>
+				<anzName>Bache</anzName>
+			</aBache>
+			<aUeberM>
+				<wildartID>103</wildartID>
+				<anzName>Überläufer, männlich</anzName>
+			</aUeberM>
+			<aUeberW>
+				<wildartID>104</wildartID>
+				<anzName>Überläufer, weiblich</anzName>
+			</aUeberW>
+			<aFrisch>
+				<wildartID>105</wildartID>
+				<anzName>Frischling</anzName>
+			</aFrisch>
+		</aWildart>
+		<aWildart wildartID="020" wildartName="aRot" anzName="Rotwild">
+			<aHirschI>
+				<wildartID>021</wildartID>
+				<anzName>Hirsch Klasse I</anzName>
+			</aHirschI>
+			<aHirschIIa>
+				<wildartID>022</wildartID>
+				<anzName>Hirsch Klasse IIa</anzName>
+			</aHirschIIa>
+			<aHirschIIb>
+				<wildartID>023</wildartID>
+				<anzName>Hirsch Klasse IIb</anzName>
+			</aHirschIIb>
+			<aHirschIII>
+				<wildartID>024</wildartID>
+				<anzName>Hirsch Klasse III</anzName>
+			</aHirschIII>
+			<aAlttier>
+				<wildartID>025</wildartID>
+				<anzName>Alttier</anzName>
+			</aAlttier>
+			<aSchmaltier>
+				<wildartID>026</wildartID>
+				<anzName>Schmaltier</anzName>
+			</aSchmaltier>
+			<aKalb>
+				<wildartID>027</wildartID>
+				<anzName>Kalb</anzName>
+			</aKalb>
+		</aWildart>
+		<aWildart wildartID="030" wildartName="aGams" anzName="Gamswild">
+			<aBockIa>
+				<wildartID>031</wildartID>
+				<anzName>Bock Klasse Ia</anzName>
+			</aBockIa>
+			<aBockIb>
+				<wildartID>032</wildartID>
+				<anzName>Bock Klasse Ib</anzName>
+			</aBockIb>
+			<aBockIIa>
+				<wildartID>033</wildartID>
+				<anzName>Bock Klasse IIa</anzName>
+			</aBockIIa>
+			<aBockIIb>
+				<wildartID>034</wildartID>
+				<anzName>Bock Klasse IIb</anzName>
+			</aBockIIb>
+			<aGeiss>
+				<wildartID>035</wildartID>
+				<anzName>Geiss</anzName>
+			</aGeiss>
+			<aJaehrling>
+				<wildartID>036</wildartID>
+				<anzName>Jährling</anzName>
+			</aJaehrling>
+			<aKitz>
+				<wildartID>037</wildartID>
+				<anzName>Kitz</anzName>
+			</aKitz>
+		</aWildart>
+		<aWildart wildartID="040" wildartName="aDam" anzName="Damwild">
+			<aHirschI>
+				<wildartID>041</wildartID>
+				<anzName>Hirsch Klasse I</anzName>
+			</aHirschI>
+			<aHirschIIa>
+				<wildartID>042</wildartID>
+				<anzName>Hirsch Klasse IIa</anzName>
+			</aHirschIIa>
+			<aHirschIIb>
+				<wildartID>043</wildartID>
+				<anzName>Hirsch Klasse IIb</anzName>
+			</aHirschIIb>
+			<aHirschIII>
+				<wildartID>044</wildartID>
+				<anzName>Hirsch Klasse III</anzName>
+			</aHirschIII>
+			<aAlttier>
+				<wildartID>045</wildartID>
+				<anzName>Alttier</anzName>
+			</aAlttier>
+			<aSchmaltier>
+				<wildartID>046</wildartID>
+				<anzName>Schmaltier</anzName>
+			</aSchmaltier>
+			<aKalb>
+				<wildartID>047</wildartID>
+				<anzName>Kalb</anzName>
+			</aKalb>
+		</aWildart>
+		<aWildart wildartID="050" wildartName="aMuffel" anzName="Muffelwild">
+			<aWidderIa>
+				<wildartID>051</wildartID>
+				<anzName>Widder Klasse Ia</anzName>
+			</aWidderIa>
+			<aWidderIb>
+				<wildartID>052</wildartID>
+				<anzName>Widder Klasse Ib</anzName>
+			</aWidderIb>
+			<aWidderIIa>
+				<wildartID>053</wildartID>
+				<anzName>Widder Klasse IIa</anzName>
+			</aWidderIIa>
+			<aWidderIIb>
+				<wildartID>054</wildartID>
+				<anzName>Widder Klasse IIb</anzName>
+			</aWidderIIb>
+			<aAltschaf>
+				<wildartID>055</wildartID>
+				<anzName>Altschaf</anzName>
+			</aAltschaf>
+			<aSchmalschaf>
+				<wildartID>056</wildartID>
+				<anzName>Schmalschaf</anzName>
+			</aSchmalschaf>
+			<aLamm>
+				<wildartID>057</wildartID>
+				<anzName>Lamm</anzName>
+			</aLamm>
+		</aWildart>
+
+
+		<!-- Aufteilung so praktikabel ?!? -->
+		<aWildart wildartID="060" wildartName="aAuerhahn" anzName="Auerhahn">
+			<aAuerhahn>
+				<wildartID>061</wildartID>
+				<anzName>Auerhahn</anzName>
+			</aAuerhahn>
+		</aWildart>
+		<aWildart wildartID="070" wildartName="aBirkhahn" anzName="Birkhahn">
+			<aBirkhahn>
+				<wildartID>071</wildartID>
+				<anzName>Birkhahn</anzName>
+			</aBirkhahn>
+		</aWildart>
+		<aWildart wildartID="080" wildartName="aRackelhahn" anzName="Rackelhahn">
+			<aRackelhahn>
+				<wildartID>081</wildartID>
+				<anzName>Rackelhahn</anzName>
+			</aRackelhahn>
+		</aWildart>
+	</streckenlisteA>
+	<streckenlisteB>
+
+
+		<!-- Alternative 1 -->
+		<bWildart>
+			<aKeiler>
+				<wildartID>101</wildartID>
+				<anzName>Keiler</anzName>
+			</aKeiler>
+			<aBache>
+				<wildartID>102</wildartID>
+				<anzName>Bache</anzName>
+			</aBache>
+			<aUeberM>
+				<wildartID>103</wildartID>
+				<anzName>Überläufer, männlich</anzName>
+			</aUeberM>
+			<aUeberW>
+				<wildartID>104</wildartID>
+				<anzName>Überläufer, weiblich</anzName>
+			</aUeberW>
+			<aFrisch>
+				<wildartID>105</wildartID>
+				<anzName>Frischling</anzName>
+			</aFrisch>
+			<bFeldhase>
+				<wildartID>201</wildartID>
+				<anzName>Feldhase</anzName>
+			</bFeldhase>
+			<bSchneehase>
+				<wildartID>202</wildartID>
+				<anzName>Schneehase</anzName>
+			</bSchneehase>
+
+			<bWildkaninchen>
+				<wildartID>203</wildartID>
+				<anzName>Wildkaninchen</anzName>
+			</bWildkaninchen>
+			<bMurmeltier>
+				<wildartID>204</wildartID>
+				<anzName>Murmeltier</anzName>
+			</bMurmeltier>
+			<bFuchs>
+				<wildartID>205</wildartID>
+				<anzName>Fuchs</anzName>
+			</bFuchs>
+			<bSteinmarder>
+				<wildartID>206</wildartID>
+				<anzName>Steinmarder</anzName>
+			</bSteinmarder>
+			<bBaummarder>
+				<wildartID>207</wildartID>
+				<anzName>Baummarder (Edelmarder)</anzName>
+			</bBaummarder>
+			<bFischotter>
+				<wildartID>208</wildartID>
+				<anzName>Fischotter</anzName>
+			</bFischotter>
+			<bIltis>
+				<wildartID>209</wildartID>
+				<anzName>Iltis</anzName>
+			</bIltis>
+			<bHermelin>
+				<wildartID>210</wildartID>
+				<anzName>Hermelin</anzName>
+			</bHermelin>
+			<bMauswiesel>
+				<wildartID>211</wildartID>
+				<anzName>Mauswiesel</anzName>
+			</bMauswiesel>
+			<bDachs>
+				<wildartID>212</wildartID>
+				<anzName>Dachs</anzName>
+			</bDachs>
+			<bWaschbaer>
+				<wildartID>213</wildartID>
+				<anzName>Waschbär</anzName>
+			</bWaschbaer>
+			<bMarderhund>
+				<wildartID>214</wildartID>
+				<anzName>Marderhund</anzName>
+			</bMarderhund>
+			<bSumpfbiber>
+				<wildartID>215</wildartID>
+				<anzName>Sumpfbiber (Nutria)</anzName>
+			</bSumpfbiber>
+			<bLuchs>
+				<wildartID>216</wildartID>
+				<anzName>Luchs</anzName>
+			</bLuchs>
+			<bWildkatze>
+				<wildartID>217</wildartID>
+				<anzName>Wildkatze</anzName>
+			</bWildkatze>
+			<bSonstHaarwild>
+				<wildartID>218</wildartID>
+				<anzName>Sonst. Haarwildart</anzName>
+			</bSonstHaarwild>
+			<bRebhuhn>
+				<wildartID>301</wildartID>
+				<anzName>Rebhuhn</anzName>
+			</bRebhuhn>
+			<bFasan>
+				<wildartID>302</wildartID>
+				<anzName>Fasan</anzName>
+			</bFasan>
+			<bRingeltaube>
+				<wildartID>303</wildartID>
+				<anzName>Ringeltaube</anzName>
+			</bRingeltaube>
+			<bTuerkentaube>
+				<wildartID>304</wildartID>
+				<anzName>Türkentaube</anzName>
+			</bTuerkentaube>
+			<bWaldschnepfe>
+				<wildartID>305</wildartID>
+				<anzName>Waldschnepfe</anzName>
+			</bWaldschnepfe>
+			<bBlaesshuhn>
+				<wildartID>306</wildartID>
+				<anzName>Bläßhuhn</anzName>
+			</bBlaesshuhn>
+			<bHoeckerschwan>
+				<wildartID>307</wildartID>
+				<anzName>Höckerschwan</anzName>
+			</bHoeckerschwan>
+			<bGraureiher>
+				<wildartID>308</wildartID>
+				<anzName>Graureiher</anzName>
+			</bGraureiher>
+			<bGaensereiher>
+				<wildartID>309</wildartID>
+				<anzName>Gänsereiher</anzName>
+			</bGaensereiher>
+			<bGraugans>
+				<wildartID>401</wildartID>
+				<anzName>Graugans</anzName>
+			</bGraugans>
+			<bSaatgans>
+				<wildartID>402</wildartID>
+				<anzName>Saatgans</anzName>
+			</bSaatgans>
+			<bKanadagans>
+				<wildartID>403</wildartID>
+				<anzName>Kanadagans</anzName>
+			</bKanadagans>
+			<bSonstGaense>
+				<wildartID>404</wildartID>
+				<anzName>Sonst. Gänseart</anzName>
+			</bSonstGaense>
+			<bStockente>
+				<wildartID>501</wildartID>
+				<anzName>Stockente</anzName>
+			</bStockente>
+			<bKrickente>
+				<wildartID>502</wildartID>
+				<anzName>Krickente</anzName>
+			</bKrickente>
+			<bKnaeckente>
+				<wildartID>503</wildartID>
+				<anzName>Knäckente</anzName>
+			</bKnaeckente>
+			<bTafelente>
+				<wildartID>504</wildartID>
+				<anzName>Tafelente</anzName>
+			</bTafelente>
+			<bReiherente>
+				<wildartID>505</wildartID>
+				<anzName>Reiherente</anzName>
+			</bReiherente>
+			<bSonstEnte>
+				<wildartID>506</wildartID>
+				<anzName>Sonst. Entenart</anzName>
+			</bSonstEnte>
+			<bLachmoewe>
+				<wildartID>601</wildartID>
+				<anzName>Lachmöwe</anzName>
+			</bLachmoewe>
+			<bSilbermoewe>
+				<wildartID>602</wildartID>
+				<anzName>Silbermöwe</anzName>
+			</bSilbermoewe>
+			<bSonstMoewe>
+				<wildartID>603</wildartID>
+				<anzName>Sonst. Möwenart</anzName>
+			</bSonstMoewe>
+			<bMaeusebussard>
+				<wildartID>701</wildartID>
+				<anzName>Mäusebussard</anzName>
+			</bMaeusebussard>
+			<bHabicht>
+				<wildartID>702</wildartID>
+				<anzName>Habicht</anzName>
+			</bHabicht>
+			<bSperber>
+				<wildartID>703</wildartID>
+				<anzName>Sperber</anzName>
+			</bSperber>
+			<bFalken>
+				<wildartID>704</wildartID>
+				<anzName>Falken</anzName>
+			</bFalken>
+			<bSonstGreifvoegel>
+				<wildartID>705</wildartID>
+				<anzName>Sonst. Greifvogelart</anzName>
+			</bSonstGreifvoegel>
+			<bElster>
+				<wildartID>801</wildartID>
+				<anzName>Elster</anzName>
+			</bElster>
+			<bEichelhaeher>
+				<wildartID>802</wildartID>
+				<anzName>Eichelhäher</anzName>
+			</bEichelhaeher>
+			<bRabenkraehe>
+				<wildartID>803</wildartID>
+				<anzName>Rabenkrähe</anzName>
+			</bRabenkraehe>
+			<bKolrabe>
+				<wildartID>804</wildartID>
+				<anzName>Kolrabe</anzName>
+			</bKolrabe>
+			<bSonstFederwild>
+				<wildartID>901</wildartID>
+				<anzName>Sonst. Federwildart</anzName>
+			</bSonstFederwild>
+
+
+		</bWildart>
+
+
+
+
+
+
+		<!-- Alternative 2 -->
+		<bWildart wildartID="201" name="bFeldhase" anzName="Feldhase"></bWildart>
+
+
+
+
+	</streckenlisteB>
+</wildarten>
