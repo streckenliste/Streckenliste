@@ -12,7 +12,7 @@ public class DataJDomParser implements DataFileIO {
 	@Override
 	public Streckenliste readStreckenliste() {
 		int jJahr=2010;
-		String xmlFile="StreckenlistePC_V51.xml";
+		String xmlFile="StreckenlistePC_V5.1.xml";
 		Document doc = new Document();
 		Element root=null;;
 		try
