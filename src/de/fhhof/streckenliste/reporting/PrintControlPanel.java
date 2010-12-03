@@ -46,7 +46,7 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 	private JPanel leerPanel;
 	
 	public boolean preview = true;
-	public Reporter rep = new Reporter(preview,new DataIO());
+	public Reporter rep = new Reporter(preview,new DataJDomParser());
 
 	public PrintControlPanel() {
 		
