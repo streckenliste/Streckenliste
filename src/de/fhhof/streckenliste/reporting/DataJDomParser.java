@@ -14,7 +14,7 @@ public class DataJDomParser implements DataFileIO {
 		int jJahr=2010;
 		String xmlFile="StreckenlistePC_V5.1.xml";
 		Document doc = new Document();
-		Element root=null;;
+		Element root=null;
 		try
 		{
 		//versuche XML-File zu öffnen	
