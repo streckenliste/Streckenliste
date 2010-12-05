@@ -338,10 +338,6 @@ public class JDomParser implements DataFileIO {
 		}
 		return aZeileV;
 	}
-	protected HashMap<AKlasse, Integer> readsumErl(HashMap<AKlasse, Integer> sumErl,Element liste_a)
-	{
-		return sumErl;
-	}
 	/**
 	 * füllen der HashMaps mit den verfügbaren aKlassen
 	 */ 
@@ -398,13 +394,38 @@ public class JDomParser implements DataFileIO {
 		}
 		return 0;
 	}
-	protected int readListeA(Streckenliste str)
+protected void readListeA(Streckenliste str)
+{
+	ListeA lista=new ListeA();
+	HashMap<AKlasse, Integer> sumErl = new HashMap();
+	HashMap<AKlasse, Integer> sumFall= new HashMap();
+	HashMap<AKlasse, Integer> sumGes= new HashMap();
+	try
+	{
+	Element aList =getAListeA();
+	lista.setJJahr(""+jJahr);
+	lista.setAbgDatum(parseGregorian(aList.getChildText("abgDatum")));
+	lista.setOrt(aList.getChildText("ort"));
+	lista.setAbgUnterschrift(aList.getChildText("abgUnterschrift"));
+	lista.setAZeile(readAZeile());
+	preFillSums(sumErl,sumFall,sumGes);			//füllen der HashMap mit den verfügbaren Klassen
+	calSums(sumErl,sumFall,sumGes);
+	lista.setSumErl(sumErl);
+	lista.setSumFall(sumFall);
+	lista.setSumGes(sumGes);
+	str.setListeA(lista);
+	}
+	catch (Exception err)
+	{
+		if(debug)
+			System.out.println("Fehler beim parsen von ListeA");
+	}
+}
+	/*protected int readListeA(Streckenliste str)
 	{
 		ListeA lista=new ListeA();
 		Element liste_a =root.getChild("daten").getChild("listeA");
 		List  <Element>JJahr=liste_a.getChildren();
-
-
 		//	String year =""+GregorianCalendar.getInstance().get(1);
 		//Variablen für die aktuelle Streckenliste A deklarienen
 		GregorianCalendar abgDatum=new GregorianCalendar();
@@ -541,6 +562,7 @@ public class JDomParser implements DataFileIO {
 		str.setListeA(lista);
 		return 0;
 	}
+	*/
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#readStreckenliste()
 	 */
@@ -550,6 +572,7 @@ public class JDomParser implements DataFileIO {
 		Streckenliste st=new Streckenliste();
 		readDeckblatt(st);
 		readListeA(st);
+		
 		return st;
 	}
 
