@@ -26,6 +26,7 @@ import de.fhhof.streckenliste.reporting.daten.BZeile;
 import de.fhhof.streckenliste.reporting.daten.ListeA;
 import de.fhhof.streckenliste.reporting.daten.ListeB;
 import de.fhhof.streckenliste.reporting.daten.RevArt;
+import de.fhhof.streckenliste.reporting.daten.Sollabschuesse;
 import de.fhhof.streckenliste.reporting.daten.Sollabschuss;
 import de.fhhof.streckenliste.reporting.daten.Streckenliste;
 import de.fhhof.streckenliste.reporting.daten.Verwert;
@@ -239,6 +240,27 @@ public class JDomParser implements DataIO {
 			if(debug)
 			{
 				System.out.println("Fehler beim holen des ListeB Element");
+			}
+		}
+		return null;
+	}
+	/**
+	 * 
+	 * @return Element Sollabschüsse
+	 */
+	protected Element getSoll()
+	{
+		Element a=new Element("a","b");
+		try
+		{
+			a=root.getChild("sollabschuesse");
+			return a;
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim holen des Sollabschüsse Element");
 			}
 		}
 		return null;
@@ -471,7 +493,6 @@ public class JDomParser implements DataIO {
 				System.out.println("Fehler beim parsen von ListeA");
 		}
 	}
-
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#readStreckenliste()
 	 */
@@ -552,9 +573,54 @@ public class JDomParser implements DataIO {
 		}
 		return bZeileV;
 	}
+
+	/**
+	 * calls getSoll() to get Element Sollabschuesse 
+	 * @return not implemented yet
+	 */
+	protected boolean readSollabsch(Vector<Sollabschuss> sa)
+	{
+		int jjahr=0;
+		int pJahre=0;
+		try
+		{
+		Element soll=getSoll();
+		List<Element> jahr=soll.getChildren();
+		for (Element t:jahr)
+		{
+			pJahre=readInt(t.getAttribute("jAbschPlan").getValue());
+			jjahr=readInt(t.getAttributeValue("pJahre"));
+			//AKlasse aKlasse, int soll, int pJahre, int jahr
+			for (Element wa:(List<Element>)t.getChildren())
+			{
+				sa.add(new Sollabschuss(
+						readAKlasse(wa.getAttributeValue("wildartID")),
+						readInt(wa.getChildText("soll")),
+						pJahre,
+						jjahr
+					));
+		}}
+		
+		}
+		catch (Exception err)
+		{
+			if (debug)
+			{
+				System.out.println("Fehler beim lesen der Sollabschüsse");
+			}
+		}
+		return true;
+	}
+/**
+ * calls readSollabsch(Vector) to get Vector Sollabschuss filled
+ * @param st fills Sollabschuesse into Streckenliste st
+ */
 	protected void readSollAbsch(Streckenliste st)
 	{
+		Sollabschuesse soll=new Sollabschuesse();
 		Vector<Sollabschuss> sa=new  Vector<Sollabschuss>();
+		readSollabsch(sa);
+		st.setSollabschuesse(soll);
 	}
 	/**
 	 * since only jJahr is given, "1.1.jJahr" is parsed to GregorianCalendar
@@ -582,7 +648,26 @@ public class JDomParser implements DataIO {
 	 * if there is a Date in  aMeldedatum testGregorian(...) will pass the line will be skipped 
 	 * @return not implemented yet
 	 */
-	protected boolean reportSt()
+	protected Element getRoot(String file)
+{
+	Document doc = new Document();
+	Element root=null;
+	try
+	{
+	//versuche XML-File zu öffnen	
+		doc = (new SAXBuilder()).build(file);
+		root=doc.getRootElement();
+	}
+	catch(Exception err)
+	{
+		if (debug)
+		{
+			System.out.println("Fehler beim öffnen der XML Datei: "+file);
+		}
+	}
+	return root;
+}
+	protected boolean setaMeldSt()
 	{
 		Element lista=getAListeA(); 
 		try
@@ -620,9 +705,25 @@ public class JDomParser implements DataIO {
 		}
 		return true;
 	}
-
+ 	protected boolean setMeldeDatum()
+ 	{
+ 		try
+ 		{
+ 		Element a=getAListeA();
+ 		String date=(new GregorianCalendar().get(4)+"."+new GregorianCalendar().get(2)+"."+new GregorianCalendar().get(1));
+ 		a.getChild("abgDatum").setText(date);
+ 		}
+ 		catch (Exception err)
+ 		{
+ 			if(debug)
+ 			{
+ 				System.out.println("Fehler beim setzen des MeldeDatum");
+ 			}
+ 		}
+ 		return true;
+ 	}
 	@Override
-	public Streckenliste readStreckenliste() {
+ 	public Streckenliste readStreckenliste() {
 		// TODO Auto-generated method stub
 		Streckenliste st=new Streckenliste();
 		readDeckblatt(st);
@@ -637,8 +738,8 @@ public class JDomParser implements DataIO {
 	 */
 	@Override
 	public Streckenliste readStreckenliste(int jahr, String revier) {
-		// TODO Auto-generated method stub
-		return readStreckenliste();
+		
+		return (new JDomParser(getRoot(revier+".xml"),jahr)).readStreckenliste();
 	}
 
 	/* (non-Javadoc)
@@ -646,9 +747,10 @@ public class JDomParser implements DataIO {
 	 */
 	@Override
 	public void streckenlisteAbschliessen(int jahr, String revier) {
-		// TODO Auto-generated method stub
-		reportSt();
-		//createNewNodes();
+		
+		new JDomParser(getRoot(revier+".xml"),jahr).setaMeldSt();
+		new JDomParser(getRoot(revier+".xml"),jahr).setMeldeDatum();
+		
 
 	}
 
@@ -657,8 +759,7 @@ public class JDomParser implements DataIO {
 	 */
 	@Override
 	public void streckenlisteZwischenmeldung(int jahr, String revier) {
-		// TODO Auto-generated method stub
-		reportSt();
+		new JDomParser(getRoot(revier+".xml"),jahr).setaMeldSt();
 	}
 
 }

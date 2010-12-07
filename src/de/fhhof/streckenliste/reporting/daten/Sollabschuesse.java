@@ -3,6 +3,7 @@ package de.fhhof.streckenliste.reporting.daten;
 import java.util.Vector;
 
 public class Sollabschuesse {
+	@Deprecated
 	private String jJahr;
 	private Vector<Sollabschuss> sollabschusse;
 	
@@ -16,9 +17,11 @@ public class Sollabschuesse {
 		this.jJahr = jJahr;
 	}
 
+	@Deprecated
 	public String getjJahr() {
 		return jJahr;
 	}
+	@Deprecated
 	public void setjJahr(String jJahr) {
 		this.jJahr = jJahr;
 	}

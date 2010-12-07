@@ -18,10 +18,11 @@ public class DataJDomParser implements DataIO {
 	 * ruft dann eine neue Instanz von JDomParser(Element root,int jJahr).readStreckenliste() auf um eine gefüllte Streckenliste Klasse zu bekommen
 	 *  @return Streckenliste gefüllte aus Konstruktor(Element root,int jJahr)
 	 */
+	int jJahr=2010;
+	String xmlFile="StreckenlistePC_V5.1.xml";
 	@Override
 	public Streckenliste readStreckenliste() {
-		int jJahr=2010;
-		String xmlFile="StreckenlistePC_V5.1.xml";
+		
 		Document doc = new Document();
 		Element root=null;
 		try
@@ -43,8 +44,8 @@ public class DataJDomParser implements DataIO {
 
 	@Override
 	public Streckenliste readStreckenliste(int jahr, String revier) {
-		int jJahr=2010;
-		String xmlFile=revier+".xml";
+		this.jJahr=jahr;
+		this.xmlFile=revier+".xml";
 		Document doc = new Document();
 		Element root=null;
 		try
@@ -57,7 +58,7 @@ public class DataJDomParser implements DataIO {
 		{
 			if (debug)
 			{
-				System.out.println("Fehler beim öffnen der XML Datei: "+revier+".xml");
+				System.out.println("Fehler beim öffnen der XML Datei: "+revier);
 			}
 		}
 		Streckenliste st=new JDomParser(root,jJahr).readStreckenliste();
@@ -71,7 +72,7 @@ public class DataJDomParser implements DataIO {
 	public void streckenlisteAbschliessen(int jahr, String revier) {
 		// TODO Auto-generated method stub
 		int jJahr=2010;
-		String xmlFile=revier+".xml";
+		xmlFile=revier+".xml";
 		Document doc = new Document();
 		Element root=null;
 		try
@@ -84,17 +85,18 @@ public class DataJDomParser implements DataIO {
 		{
 			if (debug)
 			{
-				System.out.println("Fehler beim öffnen der XML Datei: "+revier+".xml");
+				System.out.println("Fehler beim öffnen der XML Datei: "+revier);
 			}
 		}
-		new JDomParser(root,jJahr).reportSt();
+		new JDomParser(root,jJahr).setaMeldSt();
+		new JDomParser(root,jJahr).setMeldeDatum();
 	}
 
 	@Override
 	public void streckenlisteZwischenmeldung(int jahr, String revier) {
 		// TODO Auto-generated method stub
-		int jJahr=2010;
-		String xmlFile=revier+".xml";
+		
+		xmlFile=revier+".xml";
 		Document doc = new Document();
 		Element root=null;
 		try
@@ -107,10 +109,10 @@ public class DataJDomParser implements DataIO {
 		{
 			if (debug)
 			{
-				System.out.println("Fehler beim öffnen der XML Datei: "+revier+".xml");
+				System.out.println("Fehler beim öffnen der XML Datei: "+revier);
 			}
 		}
-		new JDomParser(root,jJahr).reportSt();
+		new JDomParser(root,jJahr).setaMeldSt();
 	}
 
 }

@@ -78,8 +78,8 @@ public class DataFileIODummy implements DataIO {
 		}
 		s.setSollabschuesse(sollabschuesse);
 		s.setVerwert(Verwert.erzeugnis);
-		
-		return s;
+		return new DataJDomParser().readStreckenliste();
+	//	return s;
 	}
 
 	@Override
