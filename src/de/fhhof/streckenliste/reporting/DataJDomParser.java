@@ -95,7 +95,7 @@ public class DataJDomParser implements DataIO {
 	@Override
 	public void streckenlisteZwischenmeldung(int jahr, String revier) {
 		// TODO Auto-generated method stub
-		
+		//FIXME just wanted to try this
 		xmlFile=revier+".xml";
 		Document doc = new Document();
 		Element root=null;

@@ -12,5 +12,5 @@ public interface AbstractReporting {
 	public abstract JasperPrint getPreview(boolean withControls);
 	
 	public abstract void setMeldungstyp(MeldungsTyp meldungsart);
-	public abstract MeldungsTyp getMeldungstyp();
+	public abstract MeldungsTyp getMeldungstyp(); 
 }
