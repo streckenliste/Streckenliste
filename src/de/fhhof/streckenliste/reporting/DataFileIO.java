@@ -24,7 +24,7 @@ import de.fhhof.streckenliste.reporting.daten.*;
 
 /**
  * @author ronny
- * todo RevArt,verwert,leeres abgDatum
+ * 
  *@deprecated
  */
 public class DataFileIO implements DataIO {
