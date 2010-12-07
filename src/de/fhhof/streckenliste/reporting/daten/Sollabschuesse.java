@@ -4,18 +4,16 @@ import java.util.Vector;
 
 public class Sollabschuesse {
 	private String jJahr;
-	private int pJahre;
 	private Vector<Sollabschuss> sollabschusse;
 	
 	public Sollabschuesse() {
 		sollabschusse = new Vector<Sollabschuss>();
 	}
 
-	public Sollabschuesse(String jJahr, int pJahre) {
+	public Sollabschuesse(String jJahr) {
 		this();
 		
 		this.jJahr = jJahr;
-		this.pJahre = pJahre;
 	}
 
 	public String getjJahr() {
@@ -23,13 +21,6 @@ public class Sollabschuesse {
 	}
 	public void setjJahr(String jJahr) {
 		this.jJahr = jJahr;
-	}
-
-	public int getpJahre() {
-		return pJahre;
-	}
-	public void setpJahre(int pJahre) {
-		this.pJahre = pJahre;
 	}
 
 	public Vector<Sollabschuss> getSollabschusse() {

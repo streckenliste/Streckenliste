@@ -12,6 +12,7 @@ public class BasicJasperReportFiles {
 		public static final String DECKBLATT = "deckblatt";
 		public static final String ALISTE = "listeA";
 		public static final String ALISTE_SUMMEN = "listeASummen";
+		public static final String BLISTE = "listeB";
 	}
 	//TODO Weitere Standardwerte eingeben
 	private HashMap<String, String> fileNames;

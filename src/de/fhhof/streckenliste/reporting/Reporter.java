@@ -1,8 +1,6 @@
 package de.fhhof.streckenliste.reporting;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -17,30 +15,74 @@ import net.sf.jasperreports.swing.JRViewer;
  */
 public class Reporter implements AbstractReporting {
 	/**
-	 * Bei Aktionen print und export eigene Vorschau erzeugen
+	 * Jahr für das der Reporter arbeiten soll
 	 */
-	private int year = 2010;
-	private String revNr = "0815";
+	private int year;
+	/**
+	 * Reviernummer
+	 */
+	private String revNr;
 	
+	/**
+	 * Vorschau anzeigen
+	 */
+	@Deprecated
 	private boolean showPreview;
+	/**
+	 * Art der Meldung die generiert werden soll
+	 */
 	private MeldungsTyp meldTyp;
+	/**
+	 * Zuletzt erzeugter Report
+	 */
 	private JasperPrint lastGeneratedPrint; 
 	
-	private DataFileIO dataSource;
+	/**
+	 * Datenquelle für den Reporter
+	 */
+	private DataIO dataSource;
+	/**
+	 * Namensverzeichnis; Standardnamen die zum Generieren von Reports verwendet werden
+	 */
 	private BasicJasperReportFiles reportFiles;
 	
 	/**
 	 * Erzeugt einen neuen Reporter
+	 * 
 	 * @param showPreview True wenn bei Aktionen eine eigene Vorschau erzeugt werden soll
+	 * @deprecated Verwenden: Reporter(DatFileIO)
 	 */
+	@Deprecated
 	public Reporter(boolean showPreview) {
 		this(showPreview, new DataFileIODummy());
 	}
-	public Reporter(boolean showPreview, DataFileIO dataSource) {
+	/**
+	 * Erzeugt einen Reporter
+	 * 
+	 * @param showPreview Vorschau anzeigen bei Aktionen
+	 * @param dataSource Datenquelle für den Reporter
+	 * @deprecated Verwenden: Reporter(DatFileIO)
+	 */
+	@Deprecated
+	public Reporter(boolean showPreview, DataIO dataSource) {
 		this.showPreview = showPreview;
 		this.dataSource = dataSource;
 		reportFiles = new BasicJasperReportFiles("report/");
 		meldTyp = MeldungsTyp.aktuelleDaten;
+	}
+	/**
+	 * Konstruktor um einen Reporter zu Erstellen
+	 * 
+	 * @param dataSource Datenquellen für den Report
+	 * @param jahr Jahr für das der Reporter arbeiten soll
+	 * @param revNummer Revierkennzeichen; in Zusammenhang mit Jahr wichtig um das eindeutige Revier zu kennen
+	 * @param baseReportPath Pfad in dem die Reports hinterlegt sind
+	 */
+	public Reporter(DataFileIO dataSource, int jahr, String revNummer, String baseReportPath) {
+		this.dataSource = dataSource;
+		this.year = jahr;
+		this.revNr = revNummer;
+		reportFiles = new BasicJasperReportFiles(baseReportPath);
 	}
 	/**
 	 * Einen kompillierten Report laden
@@ -59,6 +101,14 @@ public class Reporter implements AbstractReporting {
 		return result;
 	}
 	
+	/**
+	 * Handler für Aktion
+	 * 
+	 * Je nach Meldungstyp werden die entsprechenden Reports geladen und in
+	 * {@link #lastGeneratedPrint} hinterlegt. Zur Generierung wird eine Methode der Form generateReport... verwendet.
+	 * Ist der meldTyp abschluss wird in der Datenquelle ein Abschluss vermerkt
+	 * Ist der meldTyp zwischenmeldung wird in der Datenquelle eine Zwischenmeldung erstellt
+	 */
 	private void handleGenerateReportPages() {
 		//TODO Jahre und Revier muss erhalten werden
 		switch(meldTyp) {
@@ -66,7 +116,10 @@ public class Reporter implements AbstractReporting {
 		case aktuelleDaten: {generateReportPagesAktuelleDaten(); break;}
 		case zwischenmeldung: {generateReportPagesZwischenmeldung(); dataSource.streckenlisteZwischenmeldung(year, revNr); break;}
 		}
-	}	
+	}
+	/**
+	 * Generiert den Report mit allen Seiten die für die aktuelle Datenansicht erforderlich ist
+	 */
 	private void generateReportPagesAktuelleDaten() {
 		//TODO
 		//JasperReport mit dem Gearbeitet wird
@@ -99,15 +152,16 @@ public class Reporter implements AbstractReporting {
 	 * 
 	 * @param showDialog True: Speicherdialog anzeigen; false: Direkt Exportieren
 	 */
-	@Override
+	@Deprecated
 	public void export(boolean showDialog) {
 		// TODO Auto-generated method stub
+		//veraltet -> String-Variante nutzen
 		handleGenerateReportPages();
 		if (showPreview) {
 			JFrame previewWindow = new JFrame("Vorschau");
 			previewWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-			previewWindow.getContentPane().add( new JRViewer(lastGeneratedPrint) );
+			JRViewer v = new JRViewer(lastGeneratedPrint);
+			previewWindow.getContentPane().add( v );
 			previewWindow.setSize(600, 400);
 
 			previewWindow.setVisible(true);
@@ -121,7 +175,7 @@ public class Reporter implements AbstractReporting {
 	}
 
 	@Override
-	public JPanel getPreview(boolean withControls) {
+	public JasperPrint getPreview(boolean withControls) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -157,5 +211,10 @@ public class Reporter implements AbstractReporting {
 	}
 	public void setReportFiles(BasicJasperReportFiles reportFiles) {
 		this.reportFiles = reportFiles;
+	}
+	@Override
+	public void export(String fileName) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

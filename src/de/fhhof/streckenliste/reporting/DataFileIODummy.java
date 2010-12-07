@@ -19,7 +19,7 @@ import de.fhhof.streckenliste.reporting.daten.Sollabschuss;
 import de.fhhof.streckenliste.reporting.daten.Streckenliste;
 import de.fhhof.streckenliste.reporting.daten.Verwert;
 
-public class DataFileIODummy implements DataFileIO {
+public class DataFileIODummy implements DataIO {
 
 	@Override
 	public Streckenliste readStreckenliste() {
@@ -70,7 +70,6 @@ public class DataFileIODummy implements DataFileIO {
 		s.setRevNr("1234567890");
 		Sollabschuesse sollabschuesse = new Sollabschuesse(); {
 			sollabschuesse.setjJahr("2010");
-			sollabschuesse.setpJahre(2);
 			int i=0;
 			for (AKlasse ak: AKlasse.values()) {
 				sollabschuesse.getSollabschusse().add(new Sollabschuss(ak, i));

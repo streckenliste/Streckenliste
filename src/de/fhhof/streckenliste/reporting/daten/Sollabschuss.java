@@ -1,23 +1,28 @@
 package de.fhhof.streckenliste.reporting.daten;
 
 public class Sollabschuss {
-	private AKlasse AKlasse;
+	private AKlasse aKlasse;
+	private int pJahre;
 	private int soll;
 	
 	public Sollabschuss() {
-		
+		this(null, 0, 0);
 	}
 
-	public Sollabschuss(AKlasse AKlasse, int soll) {
-		this.AKlasse = AKlasse;
+	public Sollabschuss(AKlasse aKlasse, int soll) {
+		this(aKlasse, soll, 0);
+	}
+	public Sollabschuss(AKlasse aKlasse, int soll, int pJahre) {
+		this.aKlasse = aKlasse;
 		this.soll = soll;
+		this.pJahre = pJahre;
 	}
 
 	public AKlasse getAKlasse() {
-		return AKlasse;
+		return aKlasse;
 	}
-	public void setAKlasse(AKlasse AKlasse) {
-		this.AKlasse = AKlasse;
+	public void setAKlasse(AKlasse aKlasse) {
+		this.aKlasse = aKlasse;
 	}
 
 	public int getSoll() {
@@ -26,4 +31,13 @@ public class Sollabschuss {
 	public void setSoll(int soll) {
 		this.soll = soll;
 	}
+
+	public int getPJahre() {
+		return pJahre;
+	}
+
+	public void setPJahre(int pJahre) {
+		this.pJahre = pJahre;
+	}
+	
 }

@@ -1,5 +1,23 @@
 package de.fhhof.streckenliste.reporting.daten;
 
+import de.fhhof.streckenliste.util.Repository;
+
+/**
+ * Enumeration mit allen Klassen aus der Streckenliste A die während der ersten Entwicklung
+ * notwendig wahren.
+ * 
+ * Es werden neben den unterschiedlichen Klassen auch eine Klasse bereitgestellt, bei der der
+ * Inhalt gezielt festgelegt werden kann: AKlasse.aCustom. Dieser Typ sollte nur über die
+ * zugehörige Fabrikmethode getAKlasseByValues erzeugt werden, weil sonst der Inhalt nicht
+ * festgelegt werden kann, auch nicht nach der Erstellung.
+ * 
+ * Eine mögliche Erweiterung ist die Einführung einer Methode getAKlasseByName, wobei derzeit
+ * das Problem vorhanden ist, das Namen nicht eindeutig sind. Beispiel: ein Hirsch Klasse IIa
+ * kann zur Wildart Damwild aber auch Rotwild gehören. 
+ * 
+ * @author Sebastian
+ * @version 1.0 untested
+ */
 public enum AKlasse {
 	//TODO - Methode hinzufügen: getAKlasseByName
 	aBock(11, AKlasseNamen.BOCK), aGeissReh(12, AKlasseNamen.GEISS), aKitzReh(13, AKlasseNamen.KITZ),
@@ -17,45 +35,72 @@ public enum AKlasse {
 	aWidderIIa(53, AKlasseNamen.WIDDERIIA), aWidderIIb(54, AKlasseNamen.WIDDERIIB),
 	aAltschaf(55, AKlasseNamen.ALTSCHAF), aSchmalschaf(56, AKlasseNamen.SCHMALSCHAF),
 	aLamm(57, AKlasseNamen.LAMM), aAuerhahn(61, AKlasseNamen.AUERHAHN), aBirkenhahn(71, AKlasseNamen.BIRKENHAHN),
-	aRackelhahn(81, AKlasseNamen.RACKELHANH);
+	aRackelhahn(81, AKlasseNamen.RACKELHANH), aCustom(0, "");
 	
+	/**
+	 * Bezeichnungen die in den AKlassen vorkommen können
+	 * 
+	 * Bezieht sich auf das Repository
+	 * Die Einträge sind nicht final, womit auch eine Änderung noch möglich ist
+	 * 
+	 * @author Sebastian
+	 * @version 1.0 untested
+	 */
 	public static class AKlasseNamen {
-		public static String BOCK = "Bock";
-		public static String GEISS = "Geißen, Schmalrehe";
-		public static String KITZ = "Kitz";
-		public static String KEILER = "Keiler";
-		public static String BACHE = "Bache";
-		public static String UEBERM = "Überläufer männlich";
-		public static String UEBERW = "Überläufer weiblich";
-		public static String FRISCH = "Frischling";
-		public static String HIRSCHI = "Hirsch Klasse I";
-		public static String HIRSCHIIA = "Hirsch Klasse IIa";
-		public static String HIRSCHIIB = "Hirsch Klasse IIb";
-		public static String HIRSCHIII = "Hirsch Klasse III";
-		public static String ALTTIER = "Alttier";
-		public static String SCHMALTIER = "Schmaltier";
-		public static String KALB = "Kalb";
-		public static String BOCKIA = "Bock Klasse Ia";
-		public static String BOCKIB = "Bock Klasse Ib";
-		public static String BOCKIIA = "Bock Klasse IIa";
-		public static String BOCKIIB = "Bock Klasse IIb";
-		public static String JAEHRLING = "Jährling";
-		public static String WIDDERIA = "Widder Klasse Ia";
-		public static String WIDDERIB = "Widder Klasse Ib";
-		public static String WIDDERIIA = "Widder Klasse IIa";
-		public static String WIDDERIIB = "Widder Klasse IIb";
-		public static String ALTSCHAF = "Altschaft";
-		public static String SCHMALSCHAF = "Schmalschaf";
-		public static String LAMM = "Lamm";
-		public static String AUERHAHN = "Auerhahn";
-		public static String BIRKENHAHN = "Birkenhan";
-		public static String RACKELHANH = "Rackelhanh";
+		public static String BOCK = Repository.ABOCK[1];
+		public static String GEISS = Repository.AGEISS[1];
+		public static String KITZ = Repository.AKITZ[1];
+		public static String KEILER = Repository.AKEILER[1];
+		public static String BACHE = Repository.ABACHE[1];
+		public static String UEBERM = Repository.AUEBERM[1];
+		public static String UEBERW = Repository.AUEBERW[1];
+		public static String FRISCH = Repository.AFRISCH[1];
+		public static String HIRSCHI = Repository.AHIRSCHI[1];
+		public static String HIRSCHIIA = Repository.AHIRSCHIIA[1];
+		public static String HIRSCHIIB = Repository.AHIRSCHIIB[1];
+		public static String HIRSCHIII = Repository.AHIRSCHIII[1];
+		public static String ALTTIER = Repository.AALTTIER[1];
+		public static String SCHMALTIER = Repository.ASCHMALTIER[1];
+		public static String KALB = Repository.AKALB[1];
+		public static String BOCKIA = Repository.ABOCKIA[1];
+		public static String BOCKIB = Repository.ABOCKIB[1];
+		public static String BOCKIIA = Repository.ABOCKIIA[1];
+		public static String BOCKIIB = Repository.ABOCKIIB[1];
+		public static String JAEHRLING = Repository.AJAEHRLING[1];
+		public static String WIDDERIA = Repository.AWIDDERIA[1];
+		public static String WIDDERIB = Repository.AWIDDERIB[1];
+		public static String WIDDERIIA = Repository.AWIDDERIIA[1];
+		public static String WIDDERIIB = Repository.AWIDDERIIB[1];
+		public static String ALTSCHAF = Repository.AALTSCHAF[1];
+		public static String SCHMALSCHAF = Repository.ASCHMALSCHAF[1];
+		public static String LAMM = Repository.ALAMM[1];
+		public static String AUERHAHN = Repository.AAUERHAHN[1];
+		public static String BIRKENHAHN = Repository.ABIRKENHAHN[1];
+		public static String RACKELHANH = Repository.ARACKELHAHN[1];
 	}
 	
+	/**
+	 * Name der AKlasse
+	 */
 	private String aKlasseName;
+	/**
+	 * ID der AKlasse
+	 */
 	private int aKlasseWert;
+	/**
+	 * AWildart der Klasse
+	 */
 	private AWildart aWildart;
 	
+	/**
+	 * Privater Konstruktor
+	 * 
+	 * aKlassename und aKlasseWert von den Enumerationparametern übernommen 
+	 * die Wildart wird anhand der aKlasseWert berechnet um daraus die AWildartID zu berechnen
+	 * 
+	 * @param aKlasseWert aKlasseID der AKlasse
+	 * @param aKlasseName Name der AKlasse
+	 */
 	private AKlasse(int aKlasseWert, String aKlasseName) {
 		this.aKlasseName = aKlasseName;
 		this.aKlasseWert = aKlasseWert;
@@ -68,6 +113,13 @@ public enum AKlasse {
 		return null;
 	}
 	*/
+	
+	/**
+	 * Erzeugt eine AKlasse anhand einer AKlasseID
+	 * 
+	 * @param id AKlasseID anhand derer die AKlasse erzeugt werden soll
+	 * @return AKlasse-objekt; Null wenn die ID nicht bekannt ist
+	 */
 	public static AKlasse getAKlasseByID(int id) {
 		switch (id) {
 		case 11: return AKlasse.aBock;
@@ -112,18 +164,56 @@ public enum AKlasse {
 		default: return null;
 		}
 	}
+	/**
+	 * Erzeugt eine AKlasse anhand einer Wildart und einer KlassenID
+	 * 
+	 * Aus der AWildartID wird die letzte Stelle auf 0 gesetzt und die subID wird angehangen.
+	 * Die subID muss einstellig sein.
+	 * 
+	 * @param aWildart Übergeordnete Wildart
+	 * @param subID ID der Klasse; ohne vorrangegangene Wildartnumer
+	 * @return Erzeugte AKlasse; Null wenn keine AKlasse erzeugt werden konnte
+	 */
 	public static AKlasse getAKlasseBySubID(AWildart aWildart, int subID) {
 		return getAKlasseByID( (aWildart.getaWildartWert()/10)*10+subID);
 	}
+	/**
+	 * Erzeugt eine AKlasse mit übergebenen Werten
+	 * 
+	 * Es wird eine AKlasse.aCustom erzeugt und dann mit den Werten aus den Parametern belegt
+	 * 
+	 * @param aKlasseID ID der AKlasse
+	 * @param aKlasseName Name der AKlasse
+	 * @param aWildart Wildart zu der die Klasse gehört
+	 * @return Erzeugte AKlasse; basierend auf aCustom
+	 */
+	public static AKlasse getAKlasseByValues(int aKlasseID, String aKlasseName, AWildart aWildart) {
+		AKlasse result = AKlasse.aCustom;
+		result.aKlasseWert = aKlasseID;
+		result.aKlasseName = aKlasseName;
+		result.aWildart = aWildart;
+		
+		return result;
+	}
 
+	/**
+	 * Getter für Namen der AKlasse
+	 * @return Name der AKlasse
+	 */
 	public String getaKlasseName() {
 		return aKlasseName;
 	}
-
+	/**
+	 * Getter für ID der AKlasse
+	 * @return ID (integer) für Klasse
+	 */
 	public int getaKlasseWert() {
 		return aKlasseWert;
 	}
-
+	/**
+	 * Getter für Wildart 
+	 * @return
+	 */
 	public AWildart getaWildart() {
 		return aWildart;
 	}

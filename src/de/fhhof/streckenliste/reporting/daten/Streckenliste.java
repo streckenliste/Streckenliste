@@ -10,7 +10,7 @@ public class Streckenliste {
 	private String revNr;
 	private ListeA listeA;
 	private ListeB listeB;
-	private Sollabschuesse sollabschuesse;	
+	private Sollabschuesse sollabschuesse;
 	
 	//Konstruktoren
 	
@@ -84,6 +84,4 @@ public class Streckenliste {
 	public void setSollabschuesse(Sollabschuesse sollabschuesse) {
 		this.sollabschuesse = sollabschuesse;
 	}
-	
-	//Weitere Methoden
 }

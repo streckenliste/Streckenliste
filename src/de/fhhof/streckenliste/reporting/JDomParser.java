@@ -1,27 +1,32 @@
 /**
- * 
+ * //TODO BWildart parse by name
  */
 package de.fhhof.streckenliste.reporting;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
 
 import de.fhhof.streckenliste.reporting.daten.AEintragArt;
 import de.fhhof.streckenliste.reporting.daten.AKlasse;
 import de.fhhof.streckenliste.reporting.daten.AWildart;
 import de.fhhof.streckenliste.reporting.daten.AZeile;
 import de.fhhof.streckenliste.reporting.daten.AnschrUJB;
+import de.fhhof.streckenliste.reporting.daten.BWildart;
+import de.fhhof.streckenliste.reporting.daten.BZeile;
 import de.fhhof.streckenliste.reporting.daten.ListeA;
+import de.fhhof.streckenliste.reporting.daten.ListeB;
 import de.fhhof.streckenliste.reporting.daten.RevArt;
+import de.fhhof.streckenliste.reporting.daten.Sollabschuss;
 import de.fhhof.streckenliste.reporting.daten.Streckenliste;
 import de.fhhof.streckenliste.reporting.daten.Verwert;
 
@@ -29,10 +34,10 @@ import de.fhhof.streckenliste.reporting.daten.Verwert;
  * @author ronny
  *
  */
-public class JDomParser implements DataFileIO {
+public class JDomParser implements DataIO {
 
-	boolean debug=true;
-	long perf=System.currentTimeMillis();
+	boolean debug=false;
+	long sTime=System.currentTimeMillis();//store start time to measure performance
 	private Element root;
 	private int jJahr;
 	/**
@@ -187,7 +192,7 @@ public class JDomParser implements DataFileIO {
 		streckenliste.setRevNr(readRevNr());
 		streckenliste.setRevName(readRevName());
 		if(debug)
-			System.out.println("total runtime:"+(System.currentTimeMillis()-perf));
+			System.out.println("total runtime:"+(System.currentTimeMillis()-sTime));
 		return 0;
 	}
 	/**
@@ -195,7 +200,6 @@ public class JDomParser implements DataFileIO {
 	 * @return Element Jagt Jahr ListeA
 	 */
 	protected Element getAListeA()
-
 	{
 		try
 		{
@@ -214,6 +218,48 @@ public class JDomParser implements DataFileIO {
 			}
 		}
 		return null;
+	}
+	/***
+	 * 	
+	 * @return Element Liste B altuelles Jagtjahr
+	 */
+	protected Element getBListeB()
+	{
+		try
+		{
+			List<Element> a=root.getChild("daten").getChild("listeB").getChildren();
+			for(Element jahr:a)
+			{
+				if(jahr.getAttribute("jJahr").getIntValue()==jJahr)
+					return jahr;
+			}
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim holen des ListeB Element");
+			}
+		}
+		return null;
+	}
+	protected boolean testGregorian(String line)
+	{
+		GregorianCalendar a=new GregorianCalendar();
+		DateFormat df=new SimpleDateFormat("dd.MM.yyyy");
+		try
+		{
+			a.setTime(df.parse(line));
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler bei Test Umwandeln von:"+line+" in GregorianCalendar");
+			}
+			return false;
+		}
+		return true;
 	}
 	protected GregorianCalendar parseGregorian(String line)
 	{
@@ -261,8 +307,10 @@ public class JDomParser implements DataFileIO {
 		}
 		catch (Exception err)
 		{
-			System.out.println("Fehler beim parsen von : "+line+" in AWildart");
-		}
+			if(debug)
+			{
+				System.out.println("Fehler beim parsen von : "+line+" in AWildart");
+			}}
 		return aw;
 	}
 	protected AEintragArt readAEintragArt(String line)
@@ -290,8 +338,10 @@ public class JDomParser implements DataFileIO {
 		}
 		catch (Exception err)
 		{
+			if(debug)
+			{
 			System.out.println("Fehler beim parsen von : "+line+" in AKlasse");
-		}
+		}}
 		return ak;
 	}
 	protected int parseAID(String line)
@@ -312,7 +362,7 @@ public class JDomParser implements DataFileIO {
 	}
 	protected Vector<AZeile> readAZeile()
 	{
-		Vector<AZeile> aZeileV=new Vector();
+		Vector<AZeile> aZeileV=new Vector<AZeile>();
 		List <Element> z=getAListeA().getChildren();
 		for(Element eintrag:z)
 		{
@@ -381,10 +431,10 @@ public class JDomParser implements DataFileIO {
 				case 2:addAKlasseHash(sumFall,ae);break;
 				case 3:
 				case 4:addAKlasseHash(sumErl,ae);break;
-			}
+				}
 				addAKlasseHash(sumGes,ae);
-		}
 			}
+		}
 		catch (Exception err)
 		{
 			if(debug)
@@ -394,185 +444,191 @@ public class JDomParser implements DataFileIO {
 		}
 		return 0;
 	}
-protected void readListeA(Streckenliste str)
-{
-	ListeA lista=new ListeA();
-	HashMap<AKlasse, Integer> sumErl = new HashMap();
-	HashMap<AKlasse, Integer> sumFall= new HashMap();
-	HashMap<AKlasse, Integer> sumGes= new HashMap();
-	try
-	{
-	Element aList =getAListeA();
-	lista.setJJahr(""+jJahr);
-	lista.setAbgDatum(parseGregorian(aList.getChildText("abgDatum")));
-	lista.setOrt(aList.getChildText("ort"));
-	lista.setAbgUnterschrift(aList.getChildText("abgUnterschrift"));
-	lista.setAZeile(readAZeile());
-	preFillSums(sumErl,sumFall,sumGes);			//füllen der HashMap mit den verfügbaren Klassen
-	calSums(sumErl,sumFall,sumGes);
-	lista.setSumErl(sumErl);
-	lista.setSumFall(sumFall);
-	lista.setSumGes(sumGes);
-	str.setListeA(lista);
-	}
-	catch (Exception err)
-	{
-		if(debug)
-			System.out.println("Fehler beim parsen von ListeA");
-	}
-}
-	/*protected int readListeA(Streckenliste str)
+	protected void readListeA(Streckenliste str)
 	{
 		ListeA lista=new ListeA();
-		Element liste_a =root.getChild("daten").getChild("listeA");
-		List  <Element>JJahr=liste_a.getChildren();
-		//	String year =""+GregorianCalendar.getInstance().get(1);
-		//Variablen für die aktuelle Streckenliste A deklarienen
-		GregorianCalendar abgDatum=new GregorianCalendar();
-		String ort="";
-		Object abgUnterschrift="";
-		Vector<AZeile> aZeileV=new Vector();;
-		HashMap<AKlasse, Integer> sumErl = new HashMap();
-		HashMap<AKlasse, Integer> sumFall= new HashMap();
-		HashMap<AKlasse, Integer> sumGes= new HashMap();
-		preFillSums(sumErl,sumFall,sumGes);			//füllen der HashMap mit den verfügbaren Klassen
-		//Format für Datum angeben
-		DateFormat df=new SimpleDateFormat("dd.MM.yyyy");
-		//aktuelles  Jagt Jahr finden und parsen
-		for (Element o:JJahr)
+		HashMap<AKlasse, Integer> sumErl = new HashMap<AKlasse, Integer>();
+		HashMap<AKlasse, Integer> sumFall= new HashMap<AKlasse, Integer>();
+		HashMap<AKlasse, Integer> sumGes= new HashMap<AKlasse, Integer>();
+		try
 		{
-			if(Integer.parseInt(o.getAttributeValue("jJahr"))==jJahr)
-			{
-				try {
-					abgDatum.setTime(df.parse(o.getChildText("abgDatum")));
-				} catch (ParseException e) {
-					System.out.println("Fehler beim parsen von abgDatum im Jahr "+jJahr);
-					e.printStackTrace();
-				}
-				ort=o.getChildText("ort");
-				abgUnterschrift=o.getChildText("abgUschrift");
-				List <Element> aZeilea=o.getChildren("aZeile");
-
-				for(Element e:aZeilea)
-				{
-					GregorianCalendar aDate=new GregorianCalendar();
-					GregorianCalendar aMeld=new GregorianCalendar();
-					int r=0;//aErlegt(1), aVerkehr(2), aSonstFall(3), aGefangen(4)
-					try{
-						aDate.setTimeInMillis(df.parse(e.getChild("aDatum").getText()).getTime());
-
-						try
-						{
-							aMeld.setTimeInMillis(df.parse(e.getChild("aMeldedatum").getText()).getTime());
-						}
-						catch (Exception err)
-						{
-							aMeld=null;
-						}
-
-
-						//sumErl; sumFall;sumGes;
-						if (e.getChildText("aaZeileArt")!=null)
-						{
-							if (e.getChildText("aaZeileArt").equalsIgnoreCase("1"))
-							{
-								r=1;
-								try
-								{
-									sumErl.put(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))), (Integer)sumErl.get(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))))+1);
-									//	System.out.println(sumErl.get(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))))+1);
-								}
-								catch (Exception err)
-								{
-									System.out.println("**********************");
-									System.out.println("err sumErl");
-									System.out.println("aKlasse="+AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))));
-									System.out.println("Klasse="+e.getChildText("aKlasse"));
-									System.out.println("sumErl:"+(Integer)sumErl.get(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse")))));
-									System.out.println("****************");
-
-								}
-							}
-							else if (e.getChildText("aaZeileArt").equalsIgnoreCase("2")||e.getChildText("aaZeileArt").equalsIgnoreCase("3"))
-							{
-								r=2;
-								if(e.getChildText("aaZeileArt").equalsIgnoreCase("sonstFallwild"))
-									r=3;
-								try
-								{
-									sumFall.put(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))), (Integer)sumFall.get(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))))+1);
-								}
-								catch (Exception err)
-								{
-									System.out.println("**********************");
-									System.out.println("err sumFall");
-									System.out.println("aKlasse:"+AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))));
-									System.out.println("**********************");
-								}
-							}
-						}
-						try{
-							sumGes.put(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))), (Integer)sumGes.get(AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))))+1);
-						}
-
-						catch (Exception err)
-						{
-							System.out.println("err sumGes");
-						}}
-					catch (Exception err)
-					{
-						System.out.println("Err parsing Azeile Date");
-					}
-					if (e.getChild("aEintragArt").getText().equals("4"))
-						r=4;
-					//da aGewicht mit Komma angegeben ist muss mit einem Formatierer gearbeitet werden
-					Float aGwe=0F;
-					try
-					{
-						DecimalFormatSymbols nf=new DecimalFormatSymbols();
-						nf.setDecimalSeparator(',');
-						DecimalFormat format=new DecimalFormat();
-						format.setDecimalFormatSymbols(nf);
-						aGwe=(format.parse(e.getChildText("aGewicht"))).floatValue();
-					}
-					catch (Exception err)
-					{
-						System.out.println("Fehler beim umwandeln von aGewicht in Float");
-					}
-
-					try
-					{
-						aZeileV.add(new AZeile(
-								aDate,
-								aGwe,
-								AWildart.getAWildartByID(Integer.parseInt(e.getChildText("aWildart"))),
-								AKlasse.getAKlasseByID(Integer.parseInt(e.getChildText("aKlasse"))),
-								""+e.getChildText("aBemerk"),AEintragArt.getAEintragArtByID(r),
-								aMeld,
-								Integer.parseInt(e.getAttributeValue("aID"))));
-					}
-					catch (Exception err)
-					{
-						System.out.println("err in add aZeile Vector");
-						err.getStackTrace();
-					}
-				}}}
-
-		lista=new ListeA(""+jJahr, abgDatum,  ort, abgUnterschrift, aZeileV, sumErl, sumFall, sumGes);
-		str.setListeA(lista);
-		return 0;
+			Element aList =getAListeA();
+			lista.setJJahr(""+jJahr);
+			lista.setAbgDatum(parseGregorian(aList.getChildText("abgDatum")));
+			lista.setOrt(aList.getChildText("ort"));
+			lista.setAbgUnterschrift(aList.getChildText("abgUnterschrift"));
+			lista.setAZeile(readAZeile());
+			preFillSums(sumErl,sumFall,sumGes);			//füllen der HashMap mit den verfügbaren Klassen
+			calSums(sumErl,sumFall,sumGes);
+			lista.setSumErl(sumErl);
+			lista.setSumFall(sumFall);
+			lista.setSumGes(sumGes);
+			str.setListeA(lista);
+		}
+		catch (Exception err)
+		{
+			if(debug)
+				System.out.println("Fehler beim parsen von ListeA");
+		}
 	}
-	*/
+
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#readStreckenliste()
 	 */
+	/**
+	 * took jJahr from Konstructor
+	 */
+	protected BWildart readBWildart(String line)
+	{
+		BWildart bw= null;
+		try
+		{
+			bw=BWildart.getBWildartByID(Integer.parseInt(line));
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim parsen von: "+line+" nach BWildart");
+			}
+		}
+		return bw;
+	}
+	protected int readInt(String line)
+	{
+		int i=0;
+		try
+		{
+			i=Integer.parseInt(line);
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim parsen von: "+line+" nach int");
+			}
+		}
+		return i;
+	}
+	protected String readString(String line)
+	{
+		String l="";
+		try
+		{
+			l+=line;
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim parsen von: "+line+" nach String");
+			}
+		}
+		return l;
+	}
+	protected Vector<BZeile> readBZeile()
+	{
+		Vector<BZeile> bZeileV=new Vector();
+		List <Element> z=getBListeB().getChildren();
+		for(Element eintrag:z)
+		{
+			try
+			{
+				bZeileV.add(new BZeile(
+						readBWildart(eintrag.getAttributeValue("wildartID")),
+						readInt(eintrag.getChildText("bAnzErlegt")),
+						readInt(eintrag.getChildText("bAnzFallVerend")),
+						readInt(eintrag.getChildText("bAnzFallVerkehr,")),
+						readString(eintrag.getChildText("bVerkehr"))));
+			}
+			catch (Exception err)
+			{
+				if(debug)
+				{
+					System.out.println("Fehler beim hinzufügen von AZeile in Vector<AZeile>");
+				}
+			}
+
+		}
+		return bZeileV;
+	}
+	protected void readSollAbsch(Streckenliste st)
+	{
+		Vector<Sollabschuss> sa=new  Vector<Sollabschuss>();
+	}
+	/**
+	 * since only jJahr is given, "1.1.jJahr" is parsed to GregorianCalendar
+	 */ 
+	protected void readListeB(Streckenliste str)
+
+	{
+		ListeB listb=new ListeB();
+		try
+		{
+			listb.setjJahr(parseGregorian("1.1."+jJahr));
+			listb.setbZeile(readBZeile());
+		}
+		catch(Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim parsen von ListeB");
+			}
+		}
+		str.setListeB(listb);
+	}
+	/**
+	 * inserts the current date into > root.daten.listeA.jJahr<jJahr>.aZeile.aMeldedatum
+	 * if there is a Date in  aMeldedatum testGregorian(...) will pass the line will be skipped 
+	 * @return not implemented yet
+	 */
+	protected boolean reportSt()
+	{
+		Element lista=getAListeA(); 
+		try
+		{
+			List<Element> f=lista.getChildren("aZeile");
+			Element aMeldedatum=new Element("d","fef");
+			String date=(new GregorianCalendar().get(4)+"."+new GregorianCalendar().get(2)+"."+new GregorianCalendar().get(1));
+			aMeldedatum.setName("aMeldedatum");
+			aMeldedatum.setText(date);
+			for(Element zeile:f)
+			{
+				if(zeile.getChild("aMeldedatum")!=null)
+				{
+					if(testGregorian(zeile.getChildText("aMeldedatum")))
+					{
+						;
+					}
+					else
+					{
+						zeile.getChild("aMeldedatum").setText(date);
+					}
+				}
+				else
+				{
+					zeile.addContent(aMeldedatum);
+				}
+			}
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim Abschliessen");
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public Streckenliste readStreckenliste() {
 		// TODO Auto-generated method stub
 		Streckenliste st=new Streckenliste();
 		readDeckblatt(st);
 		readListeA(st);
-		
+		readListeB(st);
+		readSollAbsch(st);
 		return st;
 	}
 
@@ -582,7 +638,7 @@ protected void readListeA(Streckenliste str)
 	@Override
 	public Streckenliste readStreckenliste(int jahr, String revier) {
 		// TODO Auto-generated method stub
-		return null;
+		return readStreckenliste();
 	}
 
 	/* (non-Javadoc)
@@ -591,6 +647,8 @@ protected void readListeA(Streckenliste str)
 	@Override
 	public void streckenlisteAbschliessen(int jahr, String revier) {
 		// TODO Auto-generated method stub
+		reportSt();
+		//createNewNodes();
 
 	}
 
@@ -600,7 +658,7 @@ protected void readListeA(Streckenliste str)
 	@Override
 	public void streckenlisteZwischenmeldung(int jahr, String revier) {
 		// TODO Auto-generated method stub
-
+		reportSt();
 	}
 
 }
