@@ -31,7 +31,8 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 	private JButton abschlussMeldButton;
 	private JLabel auswahlLabel;
 	private JLabel meldungsLabel;
-	private DataFileIODummy dummy = new DataFileIODummy();
+	//private DataFileIODummy dummy = new DataFileIODummy();
+	private DataIO dummy = new DataJDomParser();
 	private int jahr = 0;
 	private String revNum = "";
 	private String path = "./report";

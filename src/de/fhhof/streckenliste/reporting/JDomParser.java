@@ -40,7 +40,7 @@ public class JDomParser implements DataIO {
 	 * 	variable to enable debug messages
 	 * if set to true debug messages will be send to console
 	 */
-	boolean debug=false;
+	private boolean debug=false;
 	/**
 	 * variable to hold the start time of class to measure performance
 	 */
@@ -60,6 +60,10 @@ public class JDomParser implements DataIO {
 	 */
 	public JDomParser(Element root,int jJahr)
 	{
+		if(debug)
+		{
+			System.out.println("Jahr="+jJahr+" root="+root.getName());
+		}
 		this.jJahr=jJahr;
 		this.root=root;
 	}
@@ -255,8 +259,13 @@ public class JDomParser implements DataIO {
 			for(Element jahr:a)
 			{
 				if(jahr.getAttribute("jJahr").getIntValue()==jJahr)
+				{
+					if(debug)
+					{
+						System.out.println("");
+					}
 					return jahr;
-			}
+				}}
 		}
 		catch (Exception err)
 		{
@@ -445,8 +454,8 @@ public class JDomParser implements DataIO {
 		{
 			if(debug)
 			{
-			System.out.println("Fehler beim parsen von : "+line+" in AKlasse");
-		}}
+				System.out.println("Fehler beim parsen von : "+line+" in AKlasse");
+			}}
 		return ak;
 	}
 	/**
@@ -481,11 +490,12 @@ public class JDomParser implements DataIO {
 	{
 		Vector<AZeile> aZeileV=new Vector<AZeile>();
 		@SuppressWarnings("unchecked")
-		List <Element> z=getAListeA().getChildren();
+		List <Element> z=getAListeA().getChildren("aZeile");
 		for(Element eintrag:z)
 		{
 			try
 			{
+
 				aZeileV.add(new AZeile(
 						parseGregorian(eintrag.getChildText("aDatum")),
 						parseFloat(eintrag.getChildText("aGewicht")),
@@ -538,8 +548,8 @@ public class JDomParser implements DataIO {
 		sum.put(
 				AKlasse.getAKlasseByID(
 						Integer.parseInt(e.getChildText("aKlasse"))),
-						sum.get(AKlasse.getAKlasseByID(
-								Integer.parseInt(e.getChildText("aKlasse"))+1)));
+						1+sum.get(AKlasse.getAKlasseByID(
+								Integer.parseInt(e.getChildText("aKlasse")))));
 	}
 	/**iterates in root.daten.listeA.jJahr<jJahr>.aZeile* and * adds AKlasse to Hashmaps
 	 * @param sumErl Hashmap zur Aufnahme des erlegten Wildes
@@ -711,24 +721,26 @@ public class JDomParser implements DataIO {
 		int pJahre=0;
 		try
 		{
-		Element soll=getSoll();
-		List<Element> jahr=soll.getChildren();
-		for (Element t:jahr)
-		{
-			pJahre=readInt(t.getAttribute("jAbschPlan").getValue());
-			jjahr=readInt(t.getAttributeValue("pJahre"));
-			//AKlasse aKlasse, int soll, int pJahre, int jahr
-			for (Element wa:(List<Element>)t.getChildren())
+			Element soll=getSoll();
+			List<Element> jahr=soll.getChildren();
+			for (Element t:jahr)
 			{
-				sa.add(new Sollabschuss(
-						readAKlasse(wa.getAttributeValue("wildartID")),
-						readInt(wa.getChildText("soll")),
-						pJahre,
-						jjahr
+				pJahre=readInt(t.getAttribute("jAbschPlan").getValue());
+				jjahr=readInt(t.getAttributeValue("pJahre"));
+				//AKlasse aKlasse, int soll, int pJahre, int jahr
+				for (Element wo:(List<Element>)t.getChildren())
+				{
+					for(Element wa:(List<Element>)wo.getChildren())
+					{
+					sa.add(new Sollabschuss(
+							readAKlasse(wa.getAttributeValue("wildartID")),
+							readInt(wa.getChildText("soll")),
+							pJahre,
+							jjahr
 					));
+				}}
+
 		}}
-		
-		}
 		catch (Exception err)
 		{
 			if (debug)
@@ -747,6 +759,7 @@ public class JDomParser implements DataIO {
 		Sollabschuesse soll=new Sollabschuesse();
 		Vector<Sollabschuss> sa=new  Vector<Sollabschuss>();
 		readSollabsch(sa);
+		soll.setSollabschusse(sa);
 		st.setSollabschuesse(soll);
 	}
 	/**
@@ -776,24 +789,24 @@ public class JDomParser implements DataIO {
 	 * @return not implemented yet
 	 */
 	protected Element getRoot(String file)
-{
-	Document doc = new Document();
-	Element root=null;
-	try
 	{
-	//versuche XML-File zu öffnen	
-		doc = (new SAXBuilder()).build(file);
-		root=doc.getRootElement();
-	}
-	catch(Exception err)
-	{
-		if (debug)
+		Document doc = new Document();
+		Element root=null;
+		try
 		{
-			System.out.println("Fehler beim öffnen der XML Datei: "+file);
+			//versuche XML-File zu öffnen	
+			doc = (new SAXBuilder()).build(file);
+			root=doc.getRootElement();
 		}
+		catch(Exception err)
+		{
+			if (debug)
+			{
+				System.out.println("Fehler beim öffnen der XML Datei: "+file);
+			}
+		}
+		return root;
 	}
-	return root;
-}
 	protected boolean setaMeldSt()
 	{
 		Element lista=getAListeA(); 
@@ -833,26 +846,26 @@ public class JDomParser implements DataIO {
 		}
 		return true;
 	}
- 	protected boolean setMeldeDatum()
- 	{
- 		try
- 		{
- 		Element a=getAListeA();
- 		String date=(new GregorianCalendar().get(4)+"."+new GregorianCalendar().get(2)+"."+new GregorianCalendar().get(1));
- 		a.getChild("abgDatum").setText(date);
- 		}
- 		catch (Exception err)
- 		{
- 			if(debug)
- 			{
- 				System.out.println("Fehler beim setzen des MeldeDatum");
- 			}
- 		}
- 		return true;
- 	}
-	
- 	@Override
- 	public Streckenliste readStreckenliste() {
+	protected boolean setMeldeDatum()
+	{
+		try
+		{
+			Element a=getAListeA();
+			String date=(new GregorianCalendar().get(4)+"."+new GregorianCalendar().get(2)+"."+new GregorianCalendar().get(1));
+			a.getChild("abgDatum").setText(date);
+		}
+		catch (Exception err)
+		{
+			if(debug)
+			{
+				System.out.println("Fehler beim setzen des MeldeDatum");
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public Streckenliste readStreckenliste() {
 		Streckenliste st=new Streckenliste();
 		readDeckblatt(st);
 		readListeA(st);
@@ -865,7 +878,7 @@ public class JDomParser implements DataIO {
 	 */
 	@Override
 	public Streckenliste readStreckenliste(int jahr, String revier) {
-		
+
 		return (new JDomParser(getRoot(revier+".xml"),jahr)).readStreckenliste();
 	}
 
@@ -874,10 +887,10 @@ public class JDomParser implements DataIO {
 	 */
 	@Override
 	public void streckenlisteAbschliessen(int jahr, String revier) {
-		
+
 		new JDomParser(getRoot(revier+".xml"),jahr).setaMeldSt();
 		new JDomParser(getRoot(revier+".xml"),jahr).setMeldeDatum();
-		
+
 
 	}
 

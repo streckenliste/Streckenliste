@@ -13,7 +13,7 @@ import de.fhhof.streckenliste.reporting.daten.Streckenliste;
  */
 public class DataJDomParser implements DataIO {
 
-	boolean debug=true;
+	private boolean debug=false;
 	/**
 	 * öffnet eine Streckenliste (String xmlFile) 
 	 * ruft dann eine neue Instanz von JDomParser(Element root,int jJahr).readStreckenliste() auf um eine gefüllte Streckenliste Klasse zu bekommen
