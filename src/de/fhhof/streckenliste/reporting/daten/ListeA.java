@@ -47,6 +47,8 @@ public class ListeA {
 	 */
 	private HashMap<AKlasse, Integer> sumGes;
 	
+	private boolean inSecureMode = false;
+	
 	/**
 	 * Basiskonstruktor
 	 * 
@@ -120,7 +122,7 @@ public class ListeA {
 	 * @param jJahr Jagdjahr das gesetzt werden soll
 	 */
 	public void setJJahr(String jJahr) {
-		if (abgDatum == null)
+		if (abgDatum == null || !inSecureMode)
 			this.jJahr = jJahr;
 	}
 	
@@ -161,7 +163,7 @@ public class ListeA {
 	 * @param ort Örtliche Zugehörigkeit der Liste A
 	 */
 	public void setOrt(String ort) {
-		if (abgDatum == null)
+		if (abgDatum == null || !inSecureMode)
 			this.ort = ort;
 	}
 	
@@ -182,7 +184,7 @@ public class ListeA {
 	 * @param abgUnterschrift Zu setzdes Unterschriftobjekt
 	 */
 	public void setAbgUnterschrift(Object abgUnterschrift) {
-		if (abgDatum == null)
+		if (abgDatum == null || !inSecureMode)
 			this.abgUnterschrift = abgUnterschrift;
 	}
 	
@@ -203,7 +205,7 @@ public class ListeA {
 	 * @param aZeile Vektor mit Einträgen der Liste A
 	 */
 	public void setAZeile(Vector<AZeile> aZeile) {
-		if (abgDatum == null)
+		if (abgDatum == null || !inSecureMode)
 			this.aZeile = aZeile;
 	}
 	
@@ -224,7 +226,7 @@ public class ListeA {
 	 * @param sumErl HashMap mit Summen von erlegten Tieren mit Zugehörigkeit zu einer AKlasse
 	 */
 	public void setSumErl(HashMap<AKlasse, Integer> sumErl) {
-		if (abgDatum == null)
+		if (abgDatum == null || !inSecureMode)
 			this.sumErl = sumErl;
 	}
 	
@@ -245,7 +247,7 @@ public class ListeA {
 	 * @param sumFall HashMap mit Summen von Fallwildtieren mit Zugehörigkeit zu einer AKlasse
 	 */
 	public void setSumFall(HashMap<AKlasse, Integer> sumFall) {
-		if (abgDatum == null)
+		if (abgDatum == null || !inSecureMode)
 			this.sumFall = sumFall;
 	}
 	
@@ -266,7 +268,14 @@ public class ListeA {
 	 * @param sumGes HashMap mit Gesamtsummen von Tieren mit Zugehörigkeit zu einer AKlasse
 	 */
 	public void setSumGes(HashMap<AKlasse, Integer> sumGes) {
-		if (abgDatum == null)
+		if (abgDatum == null || !inSecureMode)
 			this.sumGes = sumGes;
-	}	
+	}
+	
+	public boolean isInSecureMode() {
+		return inSecureMode;
+	}
+	public void setInSecureMode(boolean inSecureMode) {
+		this.inSecureMode = inSecureMode;
+	}
 }

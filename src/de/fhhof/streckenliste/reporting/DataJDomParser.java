@@ -1,6 +1,7 @@
 package de.fhhof.streckenliste.reporting;
 
 import org.jdom.Document;
+import org.apache.log4j.*;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 

@@ -36,8 +36,8 @@ public class DataFileIODummy implements DataIO {
 						AEintragArt.aErlegt, new GregorianCalendar(2010, 1, 1), 1));
 				aZeile.add(new AZeile(new GregorianCalendar(2010, 1, 2), 13, AWildart.aDam, AKlasse.aHirschIDam, "auch tot", AEintragArt.aErlegt,
 						new GregorianCalendar(2010, 1, 2), 2));
-				aZeile.add(new AZeile(new GregorianCalendar(2010, 1, 3), 12, AWildart.aAuerhahn, AKlasse.aAuerhahn, "hab dich",
-						AEintragArt.aGefangen, new GregorianCalendar(2010, 1, 3), 1));
+				aZeile.add(new AZeile(new GregorianCalendar(2010, 1, 3), 27, AWildart.aAuerhahn, AKlasse.aAuerhahn, "hab dich",
+						AEintragArt.aGefangen, new GregorianCalendar(2010, 1, 3), 3));
 			}
 			listeA.setAZeile(aZeile);
 			listeA.setJJahr("2010");
@@ -78,8 +78,8 @@ public class DataFileIODummy implements DataIO {
 		}
 		s.setSollabschuesse(sollabschuesse);
 		s.setVerwert(Verwert.erzeugnis);
-		return new DataJDomParser().readStreckenliste();
-	//	return s;
+		
+		return s;
 	}
 
 	@Override

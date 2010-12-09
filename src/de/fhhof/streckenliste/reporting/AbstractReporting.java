@@ -9,8 +9,10 @@ public interface AbstractReporting {
 	public abstract void print(boolean showDialog);
 	public abstract void export(String fileName);
 	
+	@Deprecated
 	public abstract JasperPrint getPreview(boolean withControls);
+	public abstract JasperPrint getPreview();
 	
 	public abstract void setMeldungstyp(MeldungsTyp meldungsart);
-	public abstract MeldungsTyp getMeldungstyp(); 
+	public abstract MeldungsTyp getMeldungstyp();
 }

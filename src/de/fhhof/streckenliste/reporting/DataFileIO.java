@@ -24,9 +24,10 @@ import de.fhhof.streckenliste.reporting.daten.*;
 
 /**
  * @author ronny
- * 
- *@deprecated
+ * todo RevArt,verwert,leeres abgDatum
+ * @deprecated DataJDomParser verwenden
  */
+@Deprecated
 public class DataFileIO implements DataIO {
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#readStreckenliste()

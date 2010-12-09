@@ -1,5 +1,5 @@
 /**
- * //TODO BWildart parse by name
+ * 
  */
 package de.fhhof.streckenliste.reporting;
 
@@ -36,10 +36,22 @@ import de.fhhof.streckenliste.reporting.daten.Verwert;
  *
  */
 public class JDomParser implements DataIO {
-
+	/**
+	 * 	variable to enable debug messages
+	 * if set to true debug messages will be send to console
+	 */
 	boolean debug=false;
-	long sTime=System.currentTimeMillis();//store start time to measure performance
+	/**
+	 * variable to hold the start time of class to measure performance
+	 */
+	long sTime=System.currentTimeMillis();
+	/**
+	 * root Element of Streckenliste to be set by Konstructor
+	 */
 	private Element root;
+	/**
+	 * jJahr to be set by Konstructor to to set the used year
+	 */
 	private int jJahr;
 	/**
 	 * 
@@ -50,8 +62,11 @@ public class JDomParser implements DataIO {
 	{
 		this.jJahr=jJahr;
 		this.root=root;
-		System.out.println();
 	}
+	/**
+	 * takes AnschrUJB from root.deckblatt.anschrUJB and returns it  
+	 * @return AnschrUJB
+	 */
 	protected AnschrUJB readAnschrift()
 	{
 		//begin Anschrift
@@ -92,11 +107,16 @@ public class JDomParser implements DataIO {
 		}
 		return revart;
 	}
+	/**
+	 * 
+	 * @return Verwertungs-Art from root.deckblatt.verwert
+	 * @exception return Verwert=null
+	 * @throws nothing
+	 */
 	protected Verwert readVerwert()
 	{
 		Element Verwerte=null;
 		Verwert verwert=null;
-		//begin Verwertungsart
 		try
 		{
 			Verwerte=root.getChild("deckblatt").getChild("verwert");
@@ -112,6 +132,11 @@ public class JDomParser implements DataIO {
 		}
 		return verwert;
 	}
+	/**
+	 * @exception returns empty String ""
+	 * @return String bSatzArt
+	 * @throws nothing
+	 */
 	protected String readbSatzart()
 	{
 		String bSatzart="";
@@ -129,6 +154,11 @@ public class JDomParser implements DataIO {
 		}
 		return bSatzart;
 	}
+	/**
+	 * @exception returns empty String ""
+	 * @return Srting AmtID
+	 * @throws nothing
+	 */
 	protected String readAmtID()
 	{
 		String amtID="";
@@ -147,6 +177,11 @@ public class JDomParser implements DataIO {
 
 		return amtID;
 	}
+	/**
+	 * @exception returns empty String ""
+	 * @return String RevName
+	 * @throws nothing
+	 */
 	protected String readRevName()
 	{
 		String revName="";
@@ -165,6 +200,11 @@ public class JDomParser implements DataIO {
 
 		return revName;
 	}
+	/**
+	 * @exception returns empty String ""
+	 * @return String RevNr
+	 * @throws nothing
+	 */
 	protected String readRevNr()
 	{
 		String revNr="";
@@ -183,6 +223,12 @@ public class JDomParser implements DataIO {
 
 		return revNr;
 	}
+	/**
+	 * 
+	 * @param streckenliste to be filled with Deckblatt
+	 * @return 0 nothing implemented 
+	 * @exception streckenliste does not get filled with Deckblatt
+	 */
 	protected int readDeckblatt(Streckenliste streckenliste)
 	{
 		streckenliste.setAnschrUJB(readAnschrift());
@@ -197,13 +243,14 @@ public class JDomParser implements DataIO {
 		return 0;
 	}
 	/**
-	 * 
-	 * @return Element Jagt Jahr ListeA
+	 *  
+	 * @return Element Jagt Jahr ListeA root.daten.listeA.<jJahr> from Contructor (root,jJahr)
 	 */
 	protected Element getAListeA()
 	{
 		try
 		{
+			@SuppressWarnings("unchecked")
 			List<Element> a=root.getChild("daten").getChild("listeA").getChildren();
 			for(Element jahr:a)
 			{
@@ -222,12 +269,13 @@ public class JDomParser implements DataIO {
 	}
 	/***
 	 * 	
-	 * @return Element Liste B altuelles Jagtjahr
+	 * @return Element Liste B aktuelles Jagtjahr
 	 */
 	protected Element getBListeB()
 	{
 		try
 		{
+			@SuppressWarnings("unchecked")
 			List<Element> a=root.getChild("daten").getChild("listeB").getChildren();
 			for(Element jahr:a)
 			{
@@ -246,7 +294,7 @@ public class JDomParser implements DataIO {
 	}
 	/**
 	 * 
-	 * @return Element Sollabschüsse
+	 * @return Element Sollabschüsse root.sollabschuesse
 	 */
 	protected Element getSoll()
 	{
@@ -265,6 +313,11 @@ public class JDomParser implements DataIO {
 		}
 		return null;
 	}
+	/**
+	 * 
+	 * @param line String "dd.MM.yyyy"
+	 * @return when able to parse true
+	 */
 	protected boolean testGregorian(String line)
 	{
 		GregorianCalendar a=new GregorianCalendar();
@@ -283,6 +336,12 @@ public class JDomParser implements DataIO {
 		}
 		return true;
 	}
+	/**
+	 * 
+	 * @param line String "dd.MM.yyyy"
+	 * @return GregorianCalendar 
+	 * @exception returns null
+	 */
 	protected GregorianCalendar parseGregorian(String line)
 	{
 		GregorianCalendar a=new GregorianCalendar();
@@ -297,9 +356,16 @@ public class JDomParser implements DataIO {
 			{
 				System.out.println("Fehler beim Umwandeln von:"+line+" in GregorianCalendar");
 			}
+			a=null;
 		}
 		return a;
 	}
+	/**
+	 * try to parse a String to float with DecimalSererator ','
+	 * @param line String  like "0,001"
+	 * @return float Value of String  if Exception occurs returns 0F
+	 * @throws nothing
+	 */
 	protected float parseFloat(String line)
 	{
 		Float e=0F;
@@ -320,6 +386,12 @@ public class JDomParser implements DataIO {
 		}
 		return e;
 	}
+	/**
+	 * 
+	 * @param Sting line AWildart 
+	 * @return AWildart
+	 * @exception return null
+	 */
 	protected AWildart readAWildart(String line)
 	{
 		AWildart aw=null;
@@ -335,6 +407,12 @@ public class JDomParser implements DataIO {
 			}}
 		return aw;
 	}
+	/**
+	 * 
+	 * @param String line AEintragArt of type int
+	 * @return AEintragArt
+	 * @exception returns AEintragArt=null
+	 */
 	protected AEintragArt readAEintragArt(String line)
 	{
 		AEintragArt aea=null;
@@ -351,6 +429,11 @@ public class JDomParser implements DataIO {
 		}
 		return aea;
 	}
+	/**
+	 * read String of Type AKlasse int  
+	 * @param String line AKlasse int like "11" equals aBock 
+	 * @return
+	 */
 	protected AKlasse readAKlasse (String line)
 	{
 		AKlasse ak=null;
@@ -366,9 +449,15 @@ public class JDomParser implements DataIO {
 		}}
 		return ak;
 	}
+	/**
+	 * reads Sting into int 
+	 * @param line
+	 * @return
+	 * @exception
+	 */
 	protected int parseAID(String line)
 	{
-		int i=1;
+		int i=-1;
 		try
 		{
 			i=Integer.parseInt(line);
@@ -382,9 +471,16 @@ public class JDomParser implements DataIO {
 		}
 		return i;
 	}
+	/**
+	 * reads root.daten.listeA.jJahr<jJahr>.aZeile into a Vector<AZeile> that is returned
+	 * to be inserted into Streckenliste
+	 * @return Vector<AZeile> root.daten.listeA.jJahr<jJahr>.aZeile 
+	 * @exception empty root.daten.listeA.jJahr<jJahr>.aZeile 
+	 */
 	protected Vector<AZeile> readAZeile()
 	{
 		Vector<AZeile> aZeileV=new Vector<AZeile>();
+		@SuppressWarnings("unchecked")
 		List <Element> z=getAListeA().getChildren();
 		for(Element eintrag:z)
 		{
@@ -411,7 +507,10 @@ public class JDomParser implements DataIO {
 		return aZeileV;
 	}
 	/**
-	 * füllen der HashMaps mit den verfügbaren aKlassen
+	 * füllen der HashMaps mit den verfügbaren aKlassen 0-200
+	 * @return int 0 nothing implemented yet
+	 * @param (HashMap<AKlasse, Integer>,HashMap<AKlasse, Integer>,HashMap<AKlasse, Integer>) to be filled available AKlasse.getAKlasseByID(0-200)
+	 * 
 	 */ 
 	protected int preFillSums(HashMap<AKlasse, Integer> sumErl,HashMap<AKlasse, Integer> sumFall,HashMap<AKlasse, Integer> sumGes)
 	{
@@ -426,16 +525,23 @@ public class JDomParser implements DataIO {
 		}
 		return 0;
 	}
-	protected void addAKlasseHash(HashMap<AKlasse, Integer> sumErl,Element e)
+	/**
+	 * used to count the fallen AKlasse types into a HashMap<AKlasse, Integer>
+	 * the HashMap<AKlasse, Integer> is usually initialized by preFillSums(...) with <AKlasse,0>
+	 * takes a Element parses the Child "aKlasse" to Class AKlasse 
+	 * AKlasse Integer is then looked up in HashMap and it's value  is incremented by 1
+	 * @param sum HashMap<AKlasse, Integer>
+	 * @param e Element
+	 */
+	protected void addAKlasseHash(HashMap<AKlasse, Integer> sum,Element e)
 	{
-		sumErl.put(
+		sum.put(
 				AKlasse.getAKlasseByID(
 						Integer.parseInt(e.getChildText("aKlasse"))),
-						sumErl.get(AKlasse.getAKlasseByID(
-								Integer.parseInt(e.getChildText("aKlasse")))));
+						sum.get(AKlasse.getAKlasseByID(
+								Integer.parseInt(e.getChildText("aKlasse"))+1)));
 	}
-	/**
-	 * adds AKlasse to Hashmaps
+	/**iterates in root.daten.listeA.jJahr<jJahr>.aZeile* and * adds AKlasse to Hashmaps
 	 * @param sumErl Hashmap zur Aufnahme des erlegten Wildes
 	 * @param sumFall Hashmap zur Aufnahme des Fallwildes
 	 * @param sumGes Hashmap zur Aufnahme der Summe des gemeldeten Wildes
@@ -445,6 +551,7 @@ public class JDomParser implements DataIO {
 	{
 		try
 		{
+			@SuppressWarnings("unchecked")
 			List<Element>az=getAListeA().getChildren("aZeile");
 			for(Element ae:az)
 			{
@@ -466,6 +573,11 @@ public class JDomParser implements DataIO {
 		}
 		return 0;
 	}
+	/**
+	 * <h1>calls functions to fill ListeA into Streckenliste</h1>
+	 * @param Streckenliste str to be filled with ListeA   
+	 * throws nothing ListeA is not inserted into Streckenliste
+	 */
 	protected void readListeA(Streckenliste str)
 	{
 		ListeA lista=new ListeA();
@@ -493,11 +605,9 @@ public class JDomParser implements DataIO {
 				System.out.println("Fehler beim parsen von ListeA");
 		}
 	}
-	/* (non-Javadoc)
-	 * @see de.fhhof.streckenliste.reporting.DataFileIO#readStreckenliste()
-	 */
 	/**
-	 * took jJahr from Konstructor
+	 *@param line String to be parsed into BWildart
+	 *  
 	 */
 	protected BWildart readBWildart(String line)
 	{
@@ -515,6 +625,11 @@ public class JDomParser implements DataIO {
 		}
 		return bw;
 	}
+	/**
+	 * 
+	 * @param line String to be parsed into int 
+	 * @return int of String or 0 if not able to parse
+	 */
 	protected int readInt(String line)
 	{
 		int i=0;
@@ -531,6 +646,11 @@ public class JDomParser implements DataIO {
 		}
 		return i;
 	}
+	/**
+	 * read String into String for safety purposes 
+	 * @param line String
+	 * @return String
+	 */
 	protected String readString(String line)
 	{
 		String l="";
@@ -547,9 +667,16 @@ public class JDomParser implements DataIO {
 		}
 		return l;
 	}
+	/**
+	 * returns Vector<BZeile> from root.daten.listeB.jJahr<jJahr>
+	 * <jJahr> is from Konstructor
+	 * 
+	 * @return Vector<BZeile>
+	 */
 	protected Vector<BZeile> readBZeile()
 	{
-		Vector<BZeile> bZeileV=new Vector();
+		Vector<BZeile> bZeileV=new Vector<BZeile>();
+		@SuppressWarnings("unchecked")
 		List <Element> z=getBListeB().getChildren();
 		for(Element eintrag:z)
 		{
@@ -573,11 +700,11 @@ public class JDomParser implements DataIO {
 		}
 		return bZeileV;
 	}
-
 	/**
 	 * calls getSoll() to get Element Sollabschuesse 
 	 * @return not implemented yet
 	 */
+	@SuppressWarnings("unchecked")
 	protected boolean readSollabsch(Vector<Sollabschuss> sa)
 	{
 		int jjahr=0;
@@ -611,10 +738,10 @@ public class JDomParser implements DataIO {
 		}
 		return true;
 	}
-/**
- * calls readSollabsch(Vector) to get Vector Sollabschuss filled
- * @param st fills Sollabschuesse into Streckenliste st
- */
+	/**
+	 * calls readSollabsch(Vector) to get Vector Sollabschuss filled
+	 * @param st fills Sollabschuesse into Streckenliste st
+	 */
 	protected void readSollAbsch(Streckenliste st)
 	{
 		Sollabschuesse soll=new Sollabschuesse();
@@ -672,6 +799,7 @@ public class JDomParser implements DataIO {
 		Element lista=getAListeA(); 
 		try
 		{
+			@SuppressWarnings("unchecked")
 			List<Element> f=lista.getChildren("aZeile");
 			Element aMeldedatum=new Element("d","fef");
 			String date=(new GregorianCalendar().get(4)+"."+new GregorianCalendar().get(2)+"."+new GregorianCalendar().get(1));
@@ -722,9 +850,9 @@ public class JDomParser implements DataIO {
  		}
  		return true;
  	}
-	@Override
+	
+ 	@Override
  	public Streckenliste readStreckenliste() {
-		// TODO Auto-generated method stub
 		Streckenliste st=new Streckenliste();
 		readDeckblatt(st);
 		readListeA(st);
@@ -732,7 +860,6 @@ public class JDomParser implements DataIO {
 		readSollAbsch(st);
 		return st;
 	}
-
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#readStreckenliste(int, java.lang.String)
 	 */

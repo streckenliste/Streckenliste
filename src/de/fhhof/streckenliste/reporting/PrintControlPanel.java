@@ -1,35 +1,24 @@
 package de.fhhof.streckenliste.reporting;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 
-
-public class PrintControlPanel extends AbstractReportingControlPanel implements ActionListener, ItemListener{
+/**
+ * Grafische Oberfläche für die Auswahl von Druck oder Speichern einer Meldung
+ * sowie für die Abgabe der Zwischenmeldung oder Abschlussmeldung
+ *
+ */
+public class PrintControlPanel extends AbstractReportingControlPanel implements ActionListener{
 
 	public class PrintPanelConstants {
-		public static final String AKTUELLE_MELDUNG = "Aktueller Stand der Streckenlisten";
-		public static final String ZWISCHENMELDUNG = "Zwischenmeldung der Streckenliste A";
-		public static final String ABSCHLUSSMELDUNG = "Abschlussmeldung der Streckenlisten";
-
-		public static final String DRUCKEN = "Drucken";
-		public static final String EXPORT = "Speichern";
-		public static final String VORSCHAU_ANZEIGEN = "Vorschau anzeigen";
+		public static final String AKTUELLE_MELDUNG = "Aktueller Stand";
+		public static final String ZWISCHENMELDUNG = "Zwischenmeldung";
+		public static final String ABSCHLUSSMELDUNG = "Abschlussmeldung";
 	}
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	private JPanel masterPanel;
@@ -38,36 +27,55 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 	private JRadioButton aktuelleMeldung;
 	private JRadioButton zwischenmeldung;
 	private JRadioButton abschlussmeldung;
-	private JPanel aktionsPanel;
-	private JButton druckenButton;
-	private JButton exportButton;
-	private JCheckBox vorschauAnzeigenCheckBox;
-	private JPanel centerPanel;
-	private JPanel leerPanel;
-	
-	public boolean preview = true;
-	public Reporter rep = new Reporter(preview);
+	private JButton zwischenMeldButton;
+	private JButton abschlussMeldButton;
+	private JLabel auswahlLabel;
+	private JLabel meldungsLabel;
+	private DataFileIODummy dummy = new DataFileIODummy();
+	private int jahr = 0;
+	private String revNum = "";
+	private String path = "./report";
+	private Reporter report = new Reporter(dummy, jahr, revNum, path);
+	private JRViewer v;
+	private JasperPrint page;
 
+	/**
+	 * Initialisieren der JRadioButton und Panels
+	 */
 	public PrintControlPanel() {
 		initForm();
 	}
-
+	/**
+	 * Methode zum Setzen der Panel-Layouts.
+	 * - Anlegen Panel, Label und Buttons
+	 * - Setzen des Meldungstypes
+	 * - Anlegen eines Reports
+	 * - Aufruf zum Setzen des Panels
+	 */
 	private void initForm() {
-
+		setLayout(new GridLayout(1,0));
 		masterPanel = new JPanel();
-		masterPanel.setLayout(new BorderLayout(0, 60));
-
-		centerPanel = new JPanel();
-		centerPanel.setLayout(new GridLayout(2, 1));
-		leerPanel = new JPanel();
-
-		meldungsAuswahlPanel = new JPanel(); {
-
-			meldungsAuswahlPanel.setLayout(new GridLayout(3,1));
-			TitledBorder title = BorderFactory.createTitledBorder("Art der Meldung");
-			title.setTitleJustification(TitledBorder.LEFT);
-			meldungsAuswahlPanel.setBorder(title);
-
+		masterPanel.setLayout(new BorderLayout());
+		
+		auswahlLabel = new JLabel();
+		auswahlLabel.setText("  Auswahl:");
+		
+		meldungsLabel = new JLabel();
+		meldungsLabel.setText("  Melden: ");
+		
+		zwischenMeldButton = new JButton();
+		zwischenMeldButton.addActionListener(this);
+		zwischenMeldButton.setText("Zwischenmeldung");
+		
+		abschlussMeldButton = new JButton();
+		abschlussMeldButton.addActionListener(this);
+		abschlussMeldButton.setText("Abschlussmeldung");
+		
+		meldungsAuswahlPanel = new JPanel(); 
+		meldungsAuswahlPanel.setLayout(new BoxLayout(meldungsAuswahlPanel, BoxLayout.PAGE_AXIS)); {
+			meldungsAuswahlPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+			meldungsAuswahlPanel.add(auswahlLabel);
+			meldungsAuswahlPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 			meldungsAuswahl = new ButtonGroup();
 
 			zwischenmeldung = new JRadioButton(PrintPanelConstants.ZWISCHENMELDUNG);
@@ -75,7 +83,6 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 				meldungsAuswahl.add(zwischenmeldung);
 				meldungsAuswahlPanel.add(zwischenmeldung);
 			}
-
 			abschlussmeldung = new JRadioButton(PrintPanelConstants.ABSCHLUSSMELDUNG);
 			abschlussmeldung.addActionListener(this); {
 				meldungsAuswahl.add(abschlussmeldung);
@@ -88,70 +95,66 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 				aktuelleMeldung.setSelected(true);
 				meldungsAuswahlPanel.add(aktuelleMeldung);
 			}
+			meldungsAuswahlPanel.setLayout(new BoxLayout(meldungsAuswahlPanel, BoxLayout.PAGE_AXIS));
+			meldungsAuswahlPanel.add(Box.createRigidArea(new Dimension(0, 40)));
+			meldungsAuswahlPanel.add(meldungsLabel);
+			meldungsAuswahlPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+			meldungsAuswahlPanel.add(zwischenMeldButton);
+			meldungsAuswahlPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+			meldungsAuswahlPanel.add(abschlussMeldButton);
 		}
-
-		aktionsPanel = new JPanel(); {
-
-			aktionsPanel.setLayout(new GridLayout(3, 1, 0, 5));
-
-			vorschauAnzeigenCheckBox = new JCheckBox(PrintPanelConstants.VORSCHAU_ANZEIGEN);
-			vorschauAnzeigenCheckBox.addItemListener(this); {
-				vorschauAnzeigenCheckBox.setSelected(true);
-				aktionsPanel.add(vorschauAnzeigenCheckBox);
-			}
-
-			druckenButton = new JButton(PrintPanelConstants.DRUCKEN); 
-			druckenButton.addActionListener(this); {
-				aktionsPanel.add(druckenButton);
-			}
-
-			exportButton = new JButton(PrintPanelConstants.EXPORT);
-			exportButton.addActionListener(this); {
-				aktionsPanel.add(exportButton);
-			}
-
-		}
-		centerPanel.add(meldungsAuswahlPanel);
-		centerPanel.add(aktionsPanel);
-		masterPanel.add(leerPanel, BorderLayout.NORTH);
-		masterPanel.add(centerPanel, BorderLayout.CENTER);
-
-
+		
+		report.setMeldungstyp(MeldungsTyp.aktuelleDaten);
+		page = report.getPreview();
+		setPanel(page);
+	}
+	/**
+	 * Methode zum Setzen des Panels.
+	 * - Generierung eines RestrictedViewers
+	 * - Setzen des Zoomfaktors auf Seitenbreite
+	 * - Hinzufügen der Panel auf das Hauptpanel
+	 * @param page: JasperPrint-Objekt für die Vorschau
+	 */
+	private void setPanel(JasperPrint page) {
+		v = new RestrictedViewer(page);
+		v.setZoomRatio((float) 0.69);
+		v.setBorder(BorderFactory.createEtchedBorder());
+		masterPanel.add(meldungsAuswahlPanel, BorderLayout.WEST);
+		masterPanel.add(v, BorderLayout.CENTER);
 		add(masterPanel);
 	}
-	public void itemStateChanged(ItemEvent e) {
-		
-		if (e.getStateChange() == ItemEvent.DESELECTED) {
-			preview = false;
-			System.out.println("ohne Vorschau");
-		}
-		else {
-			preview = true;
-			System.out.println("mit Vorschau");
-		}
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-				
+	/**
+	 * ActionListener für Bestimmung der Meldungsart.
+	 * Je Meldungsart wird Meldungstyp gesetzt und ein JasperPrint für die Vorschau erzeugt.
+	 * Aufruf der setPanel-Methode
+	 */
+	public void actionPerformed(ActionEvent e) {				
 		if(e.getSource() == zwischenmeldung) {
-			rep.setMeldungstyp(MeldungsTyp.zwischenmeldung);
-			System.out.println(rep.getMeldungstyp());
+			report.setMeldungstyp(MeldungsTyp.zwischenmeldung);
+			page = report.getPreview();
+			//v.pageChanged();
+			setPanel(page);
+			System.out.println(report.getMeldungstyp());	// Debug - löschen wenn fertig
 		}
 		if(e.getSource() == abschlussmeldung) {
-			rep.setMeldungstyp(MeldungsTyp.abschluss);
-			System.out.println(rep.getMeldungstyp());
+			report.setMeldungstyp(MeldungsTyp.abschluss);
+			page = report.getPreview();
+			setPanel(page);
+			System.out.println(report.getMeldungstyp());	// Debug - löschen wenn fertig
 		}
 		if(e.getSource() == aktuelleMeldung) {
-			rep.setMeldungstyp(MeldungsTyp.aktuelleDaten);
-			System.out.println(rep.getMeldungstyp());
+			report.setMeldungstyp(MeldungsTyp.aktuelleDaten);
+			page = report.getPreview();
+			setPanel(page);
+			System.out.println(report.getMeldungstyp());	// Debug - löschen wenn fertig
 		}
-		if(e.getSource() == druckenButton) {
-			rep.print(preview);
-			System.out.println("Drucken von " + rep.getMeldungstyp() + " ausgewählt mit Vorschau " + preview);
+		if(e.getSource() == zwischenMeldButton) {
+			System.out.println("Zwischenmeldung");			// Debug - löschen wenn fertig
+			// noch ausformulieren
 		}
-		if(e.getSource() == exportButton) {
-			rep.export(preview);
-			System.out.println("Export von " + rep.getMeldungstyp() + " ausgewählt mit Vorschau " + preview);
+		if(e.getSource() == abschlussMeldButton) {
+			System.out.println("Abschlussmeldung");			// Debug - löschen wenn fertig
+			// noch ausformulieren
 		}
 	}
 	
@@ -163,5 +166,4 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 		testFrame.setSize(750, 450);
 		testFrame.setVisible(true);
 	}
-
 }

@@ -6,13 +6,31 @@ import java.util.HashMap;
  * Klasse die Standardwerte für Dateinamen für Reports liefert.
  * 
  * @author Sebastian
+ * @version 1.0 untested
  */
 public class BasicJasperReportFiles {
+	/**
+	 * Klasse mit Standardschlüssel
+	 * 
+	 * Umfasst folgende Namen:
+	 * deckblatt -> Deckblatt der Streckenliste (unabhängig vom restlichen Inhalt)
+	 * aliste -> Liste A (ohne Summen und Sollwerte; umfasst nur Abschusstabelle)
+	 * aliste_summen -> Summenteil der Liste A; hat Summen und Sollwerte; enthält keine Unterschrift
+	 * und kann deshalb für eine aktuelle Ansicht oder Abschluss verwendet werden
+	 * aliste_summen_zwimeld -> Summenteil der Liste A; hat Summen und Sollwerte; enthält abschließend eine Unterschrift
+	 * bliste -> Liste B
+	 * bliste -> Liste B; hat am Ende ein Feld das bei Reportgenerierung automatisch generiert wird
+	 * 
+	 * @author Sebastian
+	 * @version 1.0 untested
+	 */
 	public static class DefaultValues {
 		public static final String DECKBLATT = "deckblatt";
 		public static final String ALISTE = "listeA";
 		public static final String ALISTE_SUMMEN = "listeASummen";
+		public static final String ALISTE_SUMMEN_ZWIMELD = "listeASummenZwi";
 		public static final String BLISTE = "listeB";
+		public static final String BLISTE_AKT = "listeBAktuell";
 	}
 	//TODO Weitere Standardwerte eingeben
 	private HashMap<String, String> fileNames;
@@ -37,8 +55,11 @@ public class BasicJasperReportFiles {
 		fileNames = new HashMap<String, String>();
 		//Defaultwerte eintragen
 		fileNames.put(DefaultValues.DECKBLATT, "deckblatt.jasper");
-		fileNames.put(DefaultValues.ALISTE, "streckenliste_a_ohneSumme.jasper");
-		fileNames.put(DefaultValues.ALISTE_SUMMEN, "streckenliste_a_summen.jasper");
+		fileNames.put(DefaultValues.ALISTE, "strelis_a_oSum.jasper");
+		fileNames.put(DefaultValues.ALISTE_SUMMEN, "strelis_a_Sum.jasper");
+		fileNames.put(DefaultValues.ALISTE_SUMMEN_ZWIMELD, "strelis_a_Sum_Zwi.jasper");
+		fileNames.put(DefaultValues.BLISTE, "strelis_b.jasper");
+		fileNames.put(DefaultValues.BLISTE_AKT, "strelis_b_akt.jasper");
 		
 		//Pfad setzen
 		setBasePath(path);
