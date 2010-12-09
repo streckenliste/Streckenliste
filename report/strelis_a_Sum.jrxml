@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="streckenliste_a_Summen" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="aWildart" class="java.lang.String">
+        <fieldDescription>aWildart</fieldDescription>
+    </field>
+	<field name="aKlasse" class="java.lang.String">
+        <fieldDescription>aKlasse</fieldDescription>
+    </field>
+	<field name="sumErl" class="java.lang.String">
+        <fieldDescription>usumErl</fieldDescription>
+    </field>
+	<field name="sumFall" class="java.lang.String">
+        <fieldDescription>sumFall</fieldDescription>
+    </field>
+	<field name="sumGes" class="java.lang.String">
+        <fieldDescription>sumGes</fieldDescription>
+    </field>
+	<field name="soll" class="java.lang.String">
+        <fieldDescription>soll</fieldDescription>
+    </field>
+	<pageHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="7" y="2" width="157" height="24"/>
+				<textElement>
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Streckenliste A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="39" width="510" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[2) Sollabschuss eines Jagdjahres nach Maßgabe des bestätigten oder festgesetzten Abschussplanes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="29" width="510" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[1) Das Gewicht ist bei Trophäenträgern ohne Haut oder Trophäe anzugeben. Gewichtsangabe entfällt, wenn Wildbret nicht verwertbar ist (z.B. bei Fallwild)]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement x="266" y="6" width="281" height="24"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="339" y="6" width="70" height="24"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="409" y="6" width="66" height="24"/>
+			</rectangle>
+			<line>
+				<reportElement x="1" y="29" width="265" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="8" width="250" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Wildart]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="8" width="68" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summe des
+erlegten Wildes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="8" width="65" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summe Fallwild]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="8" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gesamtsumme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="8" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sollabschuss]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="535" y="11" width="6" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<text><![CDATA[2)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="269" y="0" width="68" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sumErl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="65" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sumFall}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="0" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sumGes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="0" width="264" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{aWildart} + " " + ($F{aKlasse} ? $F{aKlasse} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="479" y="0" width="64" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{soll}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

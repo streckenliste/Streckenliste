@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="deckblatt" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="735"/>
+	<field name="ujbLRA" class="java.lang.String">
+		<fieldDescription><![CDATA[ujbLRA]]></fieldDescription>
+	</field>
+	<field name="ujbSG" class="java.lang.String">
+		<fieldDescription><![CDATA[ujbSG]]></fieldDescription>
+	</field>
+	<field name="ujbStr" class="java.lang.String">
+		<fieldDescription><![CDATA[ujbStr]]></fieldDescription>
+	</field>
+	<field name="ujbPLZ" class="java.lang.String">
+		<fieldDescription><![CDATA[ujbPLZ]]></fieldDescription>
+	</field>
+	<field name="ujbOrt" class="java.lang.String">
+		<fieldDescription><![CDATA[ujbOrt]]></fieldDescription>
+	</field>
+	<field name="revName" class="java.lang.String">
+		<fieldDescription><![CDATA[revName]]></fieldDescription>
+	</field>
+	<field name="jJahr" class="java.lang.String">
+		<fieldDescription><![CDATA[jJahr]]></fieldDescription>
+	</field>
+	<field name="eigenRev" class="java.lang.String">
+		<fieldDescription><![CDATA[eigenRev]]></fieldDescription>
+	</field>
+	<field name="staatsRev" class="java.lang.String">
+		<fieldDescription><![CDATA[staatsRev]]></fieldDescription>
+	</field>
+	<field name="gemeinRev" class="java.lang.String">
+		<fieldDescription><![CDATA[gemeinRev]]></fieldDescription>
+	</field>
+	<field name="weitergabe" class="java.lang.String">
+		<fieldDescription><![CDATA[weitergabe]]></fieldDescription>
+	</field>
+	<field name="zerwirkt" class="java.lang.String">
+		<fieldDescription><![CDATA[zerwirkt]]></fieldDescription>
+	</field>
+	<field name="erzeugnis" class="java.lang.String">
+		<fieldDescription><![CDATA[erzeugnis]]></fieldDescription>
+	</field>
+	<title>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="13" width="85" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[An Landratsamt/Stadt]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="22" y="25" width="184" height="100"/>
+			</rectangle>
+			<textField>
+				<reportElement x="30" y="31" width="170" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ujbLRA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="52" width="170" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["- " + $F{ujbSG} + " -"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="74" width="170" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ujbStr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="96" width="170" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ujbPLZ} + " " + $F{ujbOrt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="138" y="152" width="278" height="35"/>
+				<textElement>
+					<font fontName="Arial" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Streckenliste A und B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="193" width="73" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[für das Jahrjahr ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="277" y="213" width="49" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="277" y="193" width="49" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{jJahr}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="334" y="193" width="23" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[des]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="118" y="221" width="18" height="18"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement x="119" y="223" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{eigenRev} != null ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="142" y="221" width="44" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Eigen-]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="205" y="221" width="18" height="18"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement x="206" y="223" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{staatsRev}!= null ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="229" y="221" width="41" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Staats-]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="293" y="222" width="18" height="18"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement x="294" y="224" width="15" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{gemeinRev}!= null ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="222" width="136" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Gemeinschafts-Jagdreviers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="249" width="96" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Name des Reviers: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="141" y="249" width="331" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{revName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="138" y="269" width="334" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="10" y="291" width="118" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anleitung:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="304" width="539" height="52"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Der Nachweis über den getätigten Abschuss/Fang ist vom Revierinhaber* durch die Streckenliste zu erbringen. Sie ist in die Liste A und B unterteilt. In die
+Streckenliste ist auch alles sonst verendet aufgefundene Wild, beim Schalenwild jedoch mit Ausnahme des vor Beginn seiner Jagdzeit gefallenen, im ersten
+Lebensjahr stehenden Jungwildes einzutragen. Die Eintragungen in die Liste A sind innerhalb einer Woche, die in Liste B vor Ablauf des Jagdjahres vorzunehmen.
+
+Über erlegtes oder verendet aufgefundenes Rotwild ist außerdem innerhalb einer Woche eine Abschussmeldung nach Maßgabe der unteren
+Jagdbehörde zu erstatten.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="360" width="118" height="13"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datenschutzrechtlicher Hinweis:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="373" width="538" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Name und Anschrift des Revierinhabers werden sowohl für Zwecke der unteren Jagdbehörde als auch – in deren Auftrag – für Zwecke der Veterinärverwaltung (z. B.
+Tierseuchenbekämpfung, Überprüfung von Hygienevorschriften usw.) im Zusammenhang mit den nachfolgend ausschließlich im Auftrag der Veterinärverwaltung
+abgefragten Informationen erhoben.
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="9" y="416" width="538" height="330"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="18" y="425" width="519" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Angaben im Zusammenhang mit der Registrierungspflicht als Lebensmittelunternehmer (für die Veterinärverwaltung):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="445" width="519" height="32"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Sofern Sie Ihr erlegtes Wild ausschließlich in der Decke/im Federkleid in kleinen Mengen und nur an Endverbraucher oder örtliche Einzelhandelsunternehmer
+(z. B. Gaststätten) abgeben, entfallen für Sie die folgenden Angaben. Ansonsten kreuzen Sie bitte die auf Sie zutreffenden Punkte an:
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="26" y="478" width="16" height="18"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement x="27" y="479" width="14" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{weitergabe} != null ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="477" width="486" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Ich gebe in meinem Revier erlegtes Wild in der Decke/im Federkleid an zugelassene Wildbearbeitungsbetriebe ab]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="26" y="498" width="16" height="18"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement x="27" y="499" width="14" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{zerwirkt}!= null ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="497" width="486" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Ich gebe in meinem Revier erlegtes Wild enthäutet/gerupft/zerwirkt in kleinen Mengen an Endverbraucher oder örtliche Einzelhandelsunternehmer
+(z. B. Gaststätten) ab
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="26" y="518" width="16" height="18"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement x="27" y="519" width="14" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{erzeugnis}!= null ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="517" width="486" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Ich verarbeite das in meinem Revier erlegte Wild zu Erzeugnissen aus Wildfleisch und gebe diese an Endverbraucher ab]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="542" width="519" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[und komme hiermit meiner Verpflichtung zur Meldung als Lebensmittelunternehmer nach.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="576" width="100" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Erläuterung:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="585" width="519" height="30"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Jäger, die ihr erlegtes Wild als Primärerzeugnis (d. h. in der Decke/im Federkleid) in kleinen Mengen nur an Endverbraucher oder örtliche
+Einzelhandelsunternehmer (z. B. Gaststätten) zur direkten Abgabe an den Endverbraucher abgeben, unterliegen nicht den Verordnungen (EG) Nr. 852/2004
+und 853/2004. Sie bedürfen in diesem Zusammenhang nicht der Registrierung als Lebensmittelunternehmer.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="638" width="100" height="10"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bitte beachten:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="648" width="520" height="30"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Werden über die o. a. registrierungspflichtigen Tatbestände hinaus zusätzliche Tätigkeiten ausgeführt, kann eine Zulassung als Wildbearbeitungsbetrieb
+erforderlich sein. Nähere Informationen, ob Ihre Tätigkeit der Zulassungspflicht unterliegt oder ob eine Registrierung ausreicht, erhalten Sie bei den für Sie
+zuständigen Kreisverwaltungsbehörden, Abteilung Veterinärwesen (Veterinäramt).
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="694" width="100" height="9"/>
+				<textElement>
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hinweis:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="704" width="519" height="30"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[Mir ist bekannt, dass ich nicht verpflichtet bin, die Angaben im Zusammenhang mit der Registrierungspflicht als Lebensmittelunternehmer auszufüllen.
+Es steht mir vielmehr frei, der Meldepflicht nach der Verordnung (EG) Nr. 852/2004 über Lebensmittelhygiene unmittelbar in anderer Form bei der Kreisverwaltungsbehörde nachzukommen. Mir ist außerdem bekannt, dass ich neben der Registrierung als Lebensmittelunternehmer auch die
+Rückverfolgbarkeit des Wildes gem. Art. 18 der Verordnung (EG) Nr. 178/2002 sicherzustellen habe.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="753" width="539" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<text><![CDATA[* Wegen der besseren Lesbarkeit wird generell auf die Verwendung der femininen Formen verzichtet. Selbstverständlich gelten die Ausführungen im Sinne des Gender
+   Mainstreaming ebenso für Frauen.
+]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

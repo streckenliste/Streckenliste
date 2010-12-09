@@ -18,7 +18,7 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 		public static final String ZWISCHENMELDUNG = "Zwischenmeldung";
 		public static final String ABSCHLUSSMELDUNG = "Abschlussmeldung";
 	}
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private JPanel masterPanel;
@@ -31,12 +31,11 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 	private JButton abschlussMeldButton;
 	private JLabel auswahlLabel;
 	private JLabel meldungsLabel;
-	//private DataFileIODummy dummy = new DataFileIODummy();
-	private DataIO dummy = new DataJDomParser();
+	private DataIO data = new DataJDomParser();
 	private int jahr = 0;
 	private String revNum = "";
 	private String path = "./report";
-	private Reporter report = new Reporter(dummy, jahr, revNum, path);
+	private Reporter report = new Reporter(data, jahr, revNum, path);
 	private JRViewer v;
 	private JasperPrint page;
 
@@ -57,21 +56,21 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 		setLayout(new GridLayout(1,0));
 		masterPanel = new JPanel();
 		masterPanel.setLayout(new BorderLayout());
-		
+
 		auswahlLabel = new JLabel();
 		auswahlLabel.setText("  Auswahl:");
-		
+
 		meldungsLabel = new JLabel();
 		meldungsLabel.setText("  Melden: ");
-		
+
 		zwischenMeldButton = new JButton();
 		zwischenMeldButton.addActionListener(this);
 		zwischenMeldButton.setText("Zwischenmeldung");
-		
+
 		abschlussMeldButton = new JButton();
 		abschlussMeldButton.addActionListener(this);
 		abschlussMeldButton.setText("Abschlussmeldung");
-		
+
 		meldungsAuswahlPanel = new JPanel(); 
 		meldungsAuswahlPanel.setLayout(new BoxLayout(meldungsAuswahlPanel, BoxLayout.PAGE_AXIS)); {
 			meldungsAuswahlPanel.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -104,61 +103,62 @@ public class PrintControlPanel extends AbstractReportingControlPanel implements 
 			meldungsAuswahlPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 			meldungsAuswahlPanel.add(abschlussMeldButton);
 		}
-		
-		report.setMeldungstyp(MeldungsTyp.aktuelleDaten);
-		page = report.getPreview();
-		setPanel(page);
+		aktuelleMeldung.doClick();
 	}
 	/**
-	 * Methode zum Setzen des Panels.
-	 * - Generierung eines RestrictedViewers
-	 * - Setzen des Zoomfaktors auf Seitenbreite
-	 * - Hinzufügen der Panel auf das Hauptpanel
-	 * @param page: JasperPrint-Objekt für die Vorschau
+	 * Methode zum Setzen des Panels für die Vorschau und Navigation.
+	 * - entfernt alle Komponenten des Panels
+	 * - setzen Meldungstyp
+	 * - erzeugt neuen Report
+	 * - erzeugt Vorschau für Report
+	 * - setzen Zoomfaktor
+	 * - setzen Rahmen
+	 * - setzen Panel
+	 * - zeichnen Panel
+	 * @param meldung vom Typ Meldungstyp für die Erzeugung des entsprechenden Reports
 	 */
-	private void setPanel(JasperPrint page) {
+	private void setPanel(MeldungsTyp meldung) {
+		masterPanel.removeAll();
+		report.setMeldungstyp(meldung);
+		page = report.getPreview();
 		v = new RestrictedViewer(page);
 		v.setZoomRatio((float) 0.69);
 		v.setBorder(BorderFactory.createEtchedBorder());
 		masterPanel.add(meldungsAuswahlPanel, BorderLayout.WEST);
 		masterPanel.add(v, BorderLayout.CENTER);
 		add(masterPanel);
+		masterPanel.paintAll(getGraphics());
 	}
 	/**
 	 * ActionListener für Bestimmung der Meldungsart.
-	 * Je Meldungsart wird Meldungstyp gesetzt und ein JasperPrint für die Vorschau erzeugt.
+	 * Je nach Meldungsart wird der Meldungstyp gesetzt und ein JasperPrint für die Vorschau erzeugt
 	 * Aufruf der setPanel-Methode
 	 */
 	public void actionPerformed(ActionEvent e) {				
 		if(e.getSource() == zwischenmeldung) {
-			report.setMeldungstyp(MeldungsTyp.zwischenmeldung);
-			page = report.getPreview();
-			//v.pageChanged();
-			setPanel(page);
+			setPanel(MeldungsTyp.zwischenmeldung);
 			System.out.println(report.getMeldungstyp());	// Debug - löschen wenn fertig
 		}
 		if(e.getSource() == abschlussmeldung) {
-			report.setMeldungstyp(MeldungsTyp.abschluss);
-			page = report.getPreview();
-			setPanel(page);
+			setPanel(MeldungsTyp.abschluss);
 			System.out.println(report.getMeldungstyp());	// Debug - löschen wenn fertig
 		}
 		if(e.getSource() == aktuelleMeldung) {
-			report.setMeldungstyp(MeldungsTyp.aktuelleDaten);
-			page = report.getPreview();
-			setPanel(page);
+			setPanel(MeldungsTyp.aktuelleDaten);
 			System.out.println(report.getMeldungstyp());	// Debug - löschen wenn fertig
 		}
 		if(e.getSource() == zwischenMeldButton) {
+			data.streckenlisteZwischenmeldung(jahr, revNum);
 			System.out.println("Zwischenmeldung");			// Debug - löschen wenn fertig
 			// noch ausformulieren
 		}
 		if(e.getSource() == abschlussMeldButton) {
+			data.streckenlisteAbschliessen(jahr, revNum);
 			System.out.println("Abschlussmeldung");			// Debug - löschen wenn fertig
 			// noch ausformulieren
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		JFrame testFrame = new JFrame("DruckTest");
 		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

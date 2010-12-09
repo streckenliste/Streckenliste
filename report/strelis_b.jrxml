@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="streckenliste_b" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="85"/>
+	<field name="amtID" class="java.lang.String">
+		<fieldDescription><![CDATA[amtID]]></fieldDescription>
+	</field>
+	<field name="abgJahr" class="java.lang.String">
+		<fieldDescription><![CDATA[abgJahr]]></fieldDescription>
+	</field>
+	<field name="revNr" class="java.lang.String">
+		<fieldDescription><![CDATA[revNr]]></fieldDescription>
+	</field>
+	<field name="aKlasse" class="java.lang.String">
+		<fieldDescription><![CDATA[aKlasse]]></fieldDescription>
+	</field>
+	<field name="bWildart" class="java.lang.String">
+		<fieldDescription><![CDATA[bWildart]]></fieldDescription>
+	</field>
+	<field name="wildartID" class="java.lang.String">
+		<fieldDescription><![CDATA[bWildartID]]></fieldDescription>
+	</field>
+	<field name="bAnzErlegt" class="java.lang.String">
+		<fieldDescription><![CDATA[bAnzErlegt]]></fieldDescription>
+	</field>
+	<field name="bAnzFallVerend" class="java.lang.String">
+		<fieldDescription><![CDATA[bAnzFallVerend]]></fieldDescription>
+	</field>
+	<field name="bAnzFallVerkehr" class="java.lang.String">
+		<fieldDescription><![CDATA[bAnzFallVerkehr]]></fieldDescription>
+	</field>
+	<field name="bBemerk" class="java.lang.String">
+		<fieldDescription><![CDATA[bBemerk]]></fieldDescription>
+	</field>
+	<title>
+		<band height="109" splitType="Stretch">
+			<rectangle>
+				<reportElement x="241" y="75" width="78" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="241" y="62" width="52" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="201" y="88" width="30" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="241" y="49" width="13" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="241" y="88" width="39" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="7" y="8" width="142" height="34"/>
+				<textElement>
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Streckenliste B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="15" width="241" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[- für nicht abschusspflichtiges Wild -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="62" width="125" height="13"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Erhebungsstand 31.03.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="75" width="125" height="13"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Amtliche Schlüsselnummer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="88" width="166" height="13"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Lfd. Nr. der Revierliste des Kreises]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="88" width="29" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[0001]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="51" width="9" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[08]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="49" width="28" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Satzart]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="62" width="39" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Jagdjahr *)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="62" width="190" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="5" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(Der Erhebungsstand bezieht sich auf das mit dem 31.03. abgelaufene Jagdjahr)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="76" width="55" height="12"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Kreis/Gemeinde]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement x="248" y="62" width="41" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{abgJahr}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="244" y="75" width="71" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amtID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="240" y="89" width="36" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{revNr}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="64" splitType="Stretch">
+			<rectangle>
+				<reportElement x="236" y="10" width="68" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="236" y="45" width="68" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="304" y="10" width="106" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="304" y="22" width="49" height="23"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="304" y="45" width="49" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="353" y="22" width="57" height="23"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="353" y="45" width="57" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="410" y="10" width="137" height="50"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="159" y="47" width="72" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Spalten-Nr. (01-03)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="13" width="64" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anzahl
+erlegt/gefangen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="47" width="64" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="11" width="72" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anzahl Fallwild]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="23" width="42" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[verendet
+gefunden]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="47" width="44" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="23" width="55" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[hiervon durch
+Verkehrsunfall]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="47" width="46" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[03]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="14" width="72" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bemerkungen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="27" width="135" height="23"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(z.B. Bezeichnungen der sonstigen Wildarten; Lebendfang)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="45" width="100" height="16"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Wildart]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="12" y="5" width="189" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bWildart} ? $F{bWildart} : $F{aKlasse}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="238" y="5" width="66" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bAnzErlegt}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="308" y="5" width="42" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bAnzFallVerend}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="355" y="5" width="51" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bAnzFallVerkehr}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="412" y="0" width="135" height="30"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bBemerk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="5" width="32" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{wildartID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="50">
+			<line>
+				<reportElement x="55" y="31" width="150" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="254" y="18" width="116" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Unterschrift des Revierinhabers:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="370" y="31" width="174" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="17" width="42" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Ort, Datum:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

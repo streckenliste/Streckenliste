@@ -624,6 +624,10 @@ public class JDomParser implements DataIO {
 		BWildart bw= null;
 		try
 		{
+			if(debug)
+			{
+				System.out.println("bWildart called with "+line);
+			}
 			bw=BWildart.getBWildartByID(Integer.parseInt(line));
 		}
 		catch (Exception err)
@@ -687,7 +691,7 @@ public class JDomParser implements DataIO {
 	{
 		Vector<BZeile> bZeileV=new Vector<BZeile>();
 		@SuppressWarnings("unchecked")
-		List <Element> z=getBListeB().getChildren();
+		List <Element> z=getBListeB().getChildren("bZeile");
 		for(Element eintrag:z)
 		{
 			try
@@ -697,7 +701,7 @@ public class JDomParser implements DataIO {
 						readInt(eintrag.getChildText("bAnzErlegt")),
 						readInt(eintrag.getChildText("bAnzFallVerend")),
 						readInt(eintrag.getChildText("bAnzFallVerkehr,")),
-						readString(eintrag.getChildText("bVerkehr"))));
+						readString(eintrag.getChildText("bBemerk"))));
 			}
 			catch (Exception err)
 			{
@@ -784,9 +788,9 @@ public class JDomParser implements DataIO {
 		str.setListeB(listb);
 	}
 	/**
-	 * inserts the current date into > root.daten.listeA.jJahr<jJahr>.aZeile.aMeldedatum
-	 * if there is a Date in  aMeldedatum testGregorian(...) will pass the line will be skipped 
-	 * @return not implemented yet
+	 * function to open an XML-File and return the root Element
+	 * @param file Path and name to XML-File like "etc/Streckenliste.xml"
+	 * @return Root Element of XML-File
 	 */
 	protected Element getRoot(String file)
 	{
@@ -807,6 +811,11 @@ public class JDomParser implements DataIO {
 		}
 		return root;
 	}
+	/**
+	 * inserts the current date into > root.daten.listeA.jJahr<jJahr>.aZeile.aMeldedatum
+	 * if there is a Date in  aMeldedatum testGregorian(...) will pass the line will be skipped 
+	 * @return not implemented yet
+	 */
 	protected boolean setaMeldSt()
 	{
 		Element lista=getAListeA(); 
@@ -864,8 +873,14 @@ public class JDomParser implements DataIO {
 		return true;
 	}
 
-	@Override
-	public Streckenliste readStreckenliste() {
+	/**
+	 * @return filled Streckenliste from root Element and int jJahr filled by this class
+	 * @Override interface method
+	 * @author ronny
+	 * @category jdom parser to return filled Streckenliste for Reporting
+	 * @exception  nothing if root Element can not be parsed you get a empty Streckenliste
+	 */
+		public Streckenliste readStreckenliste() {
 		Streckenliste st=new Streckenliste();
 		readDeckblatt(st);
 		readListeA(st);
@@ -876,6 +891,9 @@ public class JDomParser implements DataIO {
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#readStreckenliste(int, java.lang.String)
 	 */
+		/**
+		 * @deprecated
+		 */
 	@Override
 	public Streckenliste readStreckenliste(int jahr, String revier) {
 
@@ -884,6 +902,9 @@ public class JDomParser implements DataIO {
 
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#streckenlisteAbschliessen(int, java.lang.String)
+	 */
+	/**
+	 * @deprecated
 	 */
 	@Override
 	public void streckenlisteAbschliessen(int jahr, String revier) {
@@ -896,6 +917,9 @@ public class JDomParser implements DataIO {
 
 	/* (non-Javadoc)
 	 * @see de.fhhof.streckenliste.reporting.DataFileIO#streckenlisteZwischenmeldung(int, java.lang.String)
+	 */
+	/**
+	 * @deprecated
 	 */
 	@Override
 	public void streckenlisteZwischenmeldung(int jahr, String revier) {
